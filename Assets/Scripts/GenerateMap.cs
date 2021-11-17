@@ -6,6 +6,8 @@ using UnityEngine.Tilemaps;
 public class GenerateMap : MonoBehaviour {
     Tilemap tilemap;
 
+    List<Sprite> floorTiles;
+
     private void Awake() {
         tilemap = GetComponent<Tilemap>();
     }
