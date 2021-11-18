@@ -10,6 +10,7 @@ public class GenerateMap : MonoBehaviour {
     [Header("Base Sprite")]
     public Sprite baseSprite;
     public Sprite testSprite;
+    public Sprite testDoorSprite;
 
     [Header("Map attributes")]
     public int sizeX;
@@ -49,7 +50,7 @@ public class GenerateMap : MonoBehaviour {
 
             bool safeToUse = true;
 
-            if (newRoom.pos.x + newRoom.width <= sizeX && newRoom.pos.y + newRoom.height <= sizeY && newRoom.pos.x >= 0 && newRoom.pos.y >= 0) {
+            if (newRoom.pos.x + newRoom.width <= sizeX - 15 && newRoom.pos.y + newRoom.height <= sizeY - 15 && newRoom.pos.x >= 15 && newRoom.pos.y >= 15) {
                 for (int i = 0; i < index; i++) {
                     if (newRoom.CollidesWith(rooms[i])) {
                         safeToUse = false;
@@ -66,10 +67,12 @@ public class GenerateMap : MonoBehaviour {
             }
         }
 
-        //draw tiles for each room on tilemap
+        //draw tiles for each room on tilemap (and doors)
         Tile testTile = ScriptableObject.CreateInstance<Tile>();
         testTile.sprite = testSprite;
-        testTile.color = Color.white;
+
+        Tile testDoorTile = ScriptableObject.CreateInstance<Tile>();
+        testDoorTile.sprite = testDoorSprite;
 
         for (int i = 0; i < index; i++) {
             for (int x = rooms[i].pos.x; x < rooms[i].pos.x + rooms[i].width; x++) {
@@ -77,12 +80,24 @@ public class GenerateMap : MonoBehaviour {
                     tilemap.SetTile(new Vector3Int(x, y, 0), testTile);
                 }
             }
+
+            for (int j = 0; j < rooms[i].numDoors; j++) {
+                tilemap.SetTile(new Vector3Int(rooms[i].doors[j].pos.x, rooms[i].doors[j].pos.y, 0), testDoorTile);
+            }
         }
     }
 
     //simple Z shaped corridor generation between doors
     private void GenerateCorridors() {
-        
+        //for each room
+        for (int i = 0; i < rooms.Length; i++) {
+            //for each door in that room
+            for (int j = 0; j < rooms[i].doors.Length; j++) {
+                //find closest door not in same room && without conenction
+
+                //create corridor between
+            }
+        }
     }
 
     private void ApplyBase() {
