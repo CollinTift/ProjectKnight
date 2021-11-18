@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 463320640}
   - component: {fileID: 463320642}
   - component: {fileID: 463320641}
+  - component: {fileID: 463320643}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -376,6 +377,30 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &463320643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463320639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db38df2bd2cedad45add6d08935948ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSprite: {fileID: 21300000, guid: d4aad733b32731b4a8fa41b069a2b862, type: 3}
+  sizeX: 100
+  sizeY: 100
+  floorSprites:
+  - {fileID: 21300000, guid: bc0941ee415ec5c49bdc74b686ff688f, type: 3}
+  - {fileID: 21300000, guid: bf67ae5a641eb654c9943bef2f0c07f7, type: 3}
+  - {fileID: 21300000, guid: 2a768ec1274d4b848bad75a633aeb9eb, type: 3}
+  - {fileID: 21300000, guid: 3c1b3005aeccf2548bbf36f21822aedd, type: 3}
+  - {fileID: 21300000, guid: dbf65a3f2fe1f3b4f8280fe1b65d8732, type: 3}
+  - {fileID: 21300000, guid: cefe1f22dcab9e2478b61fdf75e1544c, type: 3}
+  - {fileID: 21300000, guid: b2cf33f07ea7e1f4c9bd1340d2f280ca, type: 3}
+  - {fileID: 21300000, guid: 77b426c97f148fe4ea117feff52541eb, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
