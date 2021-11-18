@@ -15,7 +15,7 @@ public class GenerateMap : MonoBehaviour {
     [Header("Map attributes")]
     public int sizeX;
     public int sizeY;
-    public int numRooms;
+    public int numRooms = 2;
     public int minRoomDimension;
     public int maxRoomDimension;
     private Room[] rooms;
@@ -33,20 +33,29 @@ public class GenerateMap : MonoBehaviour {
         floorTiles = InstantiateTiles(floorSprites);
 
         GenerateRooms();
-        GenerateCorridors();
+        //GenerateCorridors();
     }
 
     private void GenerateRooms() {
         //generate room and test to make sure it does not collide with others, if it does generate new until max is rteached
         int index = 0;
+
         while (index < numRooms) {
             Vector2Int randPos = new Vector2Int(Random.Range(0, sizeX), Random.Range(0, sizeY));
             int randWidth = Random.Range(minRoomDimension, maxRoomDimension);
             int randHeight = Random.Range(minRoomDimension, maxRoomDimension);
-            Room.RoomType randType = (Room.RoomType)Random.Range(0, (int)Room.RoomType.COUNT);
-            int randNumDoors = Random.Range(1, 3) * 2;
+            Room.RoomType randType;
 
-            Room newRoom = new Room(randPos, randWidth, randHeight, randType, randNumDoors);
+            // must have entrance and exit room
+            if (index == 0) {
+                randType = Room.RoomType.entrance;
+            } else if (index == 1) {
+                randType = Room.RoomType.exit;
+            } else {
+                randType = (Room.RoomType)Random.Range(0, (int)Room.RoomType.COUNT - 2);
+            }
+
+            Room newRoom = new Room(randPos, randWidth, randHeight, randType, 2);
 
             bool safeToUse = true;
 
@@ -83,21 +92,6 @@ public class GenerateMap : MonoBehaviour {
 
             for (int j = 0; j < rooms[i].numDoors; j++) {
                 tilemap.SetTile(new Vector3Int(rooms[i].doors[j].pos.x, rooms[i].doors[j].pos.y, 0), testDoorTile);
-            }
-        }
-    }
-
-    //simple Z shaped corridor generation between doors
-    private void GenerateCorridors() {
-        //for each room
-        for (int i = 0; i < rooms.Length; i++) {
-            //for each door in that room
-            for (int j = 0; j < rooms[i].doors.Length; j++) {
-                //find closest door not in same room && without conenction
-
-                //connect doors
-                
-                //create corridors
             }
         }
     }
