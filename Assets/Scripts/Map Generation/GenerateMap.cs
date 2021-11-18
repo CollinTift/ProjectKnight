@@ -95,7 +95,9 @@ public class GenerateMap : MonoBehaviour {
             for (int j = 0; j < rooms[i].doors.Length; j++) {
                 //find closest door not in same room && without conenction
 
-                //create corridor between
+                //connect doors
+                
+                //create corridors
             }
         }
     }
