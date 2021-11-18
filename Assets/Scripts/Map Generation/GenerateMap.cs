@@ -23,10 +23,12 @@ public class GenerateMap : MonoBehaviour {
         ApplyBase();
 
         floorTiles = InstantiateTiles(floorSprites);
+
+        Room room = new Room();
     }
 
     private void ApplyBase() {
-        Tile baseTile = new Tile();
+        Tile baseTile = ScriptableObject.CreateInstance<Tile>();
         baseTile.sprite = baseSprite;
         baseTile.color = Color.black;
 
@@ -41,7 +43,7 @@ public class GenerateMap : MonoBehaviour {
         Tile[] tileArray = new Tile[sprites.Length];
 
         for (int i = 0; i < sprites.Length; i++) {
-            tileArray[i] = new Tile();
+            tileArray[i] = ScriptableObject.CreateInstance<Tile>();
             tileArray[i].sprite = sprites[i];
         }
 
@@ -51,8 +53,4 @@ public class GenerateMap : MonoBehaviour {
     //loop through each pixel per tile and create new texture2D to return and apply to a tile for procedural generation!!!!
     //https://docs.unity3d.com/ScriptReference/Tilemaps.TileBase.html
     //https://docs.unity3d.com/ScriptReference/Tilemaps.Tilemap.html
-
-    private class Room {
-
-    }
 }
