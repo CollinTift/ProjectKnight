@@ -5,9 +5,8 @@ using UnityEngine;
 public class Room {
     public Vector2Int pos;
     public int width, height;
-    public int numDoors;
-    public Door[] doors;
-    RoomType roomType;
+    public RoomType roomType;
+    public Corridor.Direction enteringCorDir;
 
     public enum RoomType {
         empty,
@@ -19,7 +18,9 @@ public class Room {
         COUNT
     }    
 
-    public Room(Vector2Int pos, int width, int height, RoomType roomType, int numDoors) {
+    public Room(Vector2Int pos, int width, int height, RoomType roomType):this(pos, width, height, roomType, null) {}
+
+    public Room(Vector2Int pos, int width, int height, RoomType roomType, Corridor corridor) {
         this.pos = pos;
 
         this.width = width;
@@ -27,10 +28,9 @@ public class Room {
 
         this.roomType = roomType;
 
-        this.numDoors = numDoors;
-        doors = new Door[numDoors];
-
-        GenerateDoors();
+        if (corridor != null) {
+            enteringCorDir = corridor.direction;
+        }
     }
 
     public bool CollidesWith(Room room) {
@@ -46,65 +46,5 @@ public class Room {
         }
 
         return false;
-    }
-
-    private void GenerateDoors() {
-        int index = 0;
-        while (index < numDoors) {
-            Door tempDoor;
-
-            switch (Random.Range(0, 4)) {
-                case 0:
-                    tempDoor = new Door(pos.x + Random.Range(0, width), pos.y - 1, Door.Side.bottom);
-                    break;
-                case 1:
-                    tempDoor = new Door(pos.x + Random.Range(0, width), pos.y + height, Door.Side.top);
-                    break;
-                case 2:
-                    tempDoor = new Door(pos.x - 1, pos.y + Random.Range(0, height), Door.Side.left);
-                    break;
-                default:
-                    tempDoor = new Door(pos.x + width, pos.y + Random.Range(0, height), Door.Side.right);
-                    break;
-            }
-
-            bool safeToUse = true;
-
-            for (int i = 0; i < index; i++) {
-                if (tempDoor.pos == doors[i].pos) {
-                    safeToUse = false;
-                    break;
-                }
-            }
-
-            if (safeToUse) {
-                doors[index] = tempDoor;
-                index++;
-            }
-        }
-    }
-
-    public class Door {
-        public Vector2Int pos;
-        public Door connectedDoor;
-        public Side side;
-
-        public enum Side {
-            bottom,
-            top,
-            left,
-            right
-        }
-
-        public Door(int x, int y, Side side) {
-            pos = new Vector2Int(x, y);
-            this.side = side;
-
-            connectedDoor = null;
-        }
-
-        public void ConnectTo(Door target) {
-            connectedDoor = target;
-        }
     }
 }
