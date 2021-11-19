@@ -17,7 +17,6 @@ public class GenerateMap : MonoBehaviour {
     public int numRooms = 2;
     public int minRoomDimension;
     public int maxRoomDimension;
-    public int corridorLengthMax;
     private Room[] rooms;
     private Corridor[] corridors;
 
@@ -40,66 +39,66 @@ public class GenerateMap : MonoBehaviour {
     private void GenerateRooms() {
         //-----------------OLD ROOM GEN---------------
         //generate room and test to make sure it does not collide with others, if it does generate new until max is rteached
-        //int index = 0;
+        int index = 0;
 
-        //while (index < numRooms) {
-        //    Vector2Int randPos = new Vector2Int(Random.Range(0, sizeX), Random.Range(0, sizeY));
-        //    int randWidth = Random.Range(minRoomDimension, maxRoomDimension);
-        //    int randHeight = Random.Range(minRoomDimension, maxRoomDimension);
-        //    Room.RoomType randType;
+        while (index < numRooms) {
+            Vector2Int randPos = new Vector2Int(Random.Range(0, sizeX), Random.Range(0, sizeY));
+            int randWidth = Random.Range(minRoomDimension, maxRoomDimension);
+            int randHeight = Random.Range(minRoomDimension, maxRoomDimension);
+            Room.RoomType randType;
 
-        //    // must have entrance and exit room
-        //    if (index == 0) {
-        //        randType = Room.RoomType.entrance;
-        //    } else if (index == 1) {
-        //        randType = Room.RoomType.exit;
-        //    } else {
-        //        randType = (Room.RoomType)Random.Range(0, (int)Room.RoomType.COUNT - 2);
-        //    }
+            // must have entrance and exit room
+            if (index == 0) {
+                randType = Room.RoomType.entrance;
+            } else if (index == 1) {
+                randType = Room.RoomType.exit;
+            } else {
+                randType = (Room.RoomType)Random.Range(0, (int)Room.RoomType.COUNT - 2); //-2 because of entrance and exit
+            }
 
-        //    Room newRoom = new Room(randPos, randWidth, randHeight, randType, 2);
+            Room newRoom = new Room(randPos, randWidth, randHeight, randType);
 
-        //    bool safeToUse = true;
+            bool safeToUse = true;
 
-        //    if (newRoom.pos.x + newRoom.width <= sizeX - 15 && newRoom.pos.y + newRoom.height <= sizeY - 15 && newRoom.pos.x >= 15 && newRoom.pos.y >= 15) {
-        //        for (int i = 0; i < index; i++) {
-        //            if (newRoom.CollidesWith(rooms[i])) {
-        //                safeToUse = false;
-        //                break;
-        //            }
-        //        }
-        //    } else {
-        //        safeToUse = false;
-        //    }
+            if (newRoom.pos.x + newRoom.width <= sizeX - 15 && newRoom.pos.y + newRoom.height <= sizeY - 15 && newRoom.pos.x >= 15 && newRoom.pos.y >= 15) {
+                for (int i = 0; i < index; i++) {
+                    if (newRoom.CollidesWith(rooms[i])) {
+                        safeToUse = false;
+                        break;
+                    }
+                }
+            } else {
+                safeToUse = false;
+            }
 
-        //    if (safeToUse) {
-        //        rooms[index] = newRoom;
-        //        index++;
-        //    }
-        //}
-
-        //---------------NEW SEXY SQUEAKY CLEAN ROOM GEN-------------
-        rooms[0] = new Room(
-                    new Vector2Int(Mathf.FloorToInt(sizeX / 2), Mathf.FloorToInt(sizeY / 2)),
-                    Random.Range(minRoomDimension, maxRoomDimension),
-                    Random.Range(minRoomDimension, maxRoomDimension),
-                    Room.RoomType.entrance);
-
-        corridors[0] = new Corridor(
-                    rooms[0],
-                    corridorLengthMax,
-                    true);
-
-        for (int i = 1; i < rooms.Length; i++) {
-            rooms[i] = new Room(corridors[i - 1].endPos,
-                    Random.Range(minRoomDimension, maxRoomDimension),
-                    Random.Range(minRoomDimension, maxRoomDimension),
-                    (Room.RoomType)Random.Range(0, (int)Room.RoomType.COUNT));
-
-            if (i < corridors.Length) {
-                corridors[i] = new Corridor(rooms[i], corridorLengthMax, false);
+            if (safeToUse) {
+                rooms[index] = newRoom;
+                index++;
             }
         }
+
+        ////---------------NEW SEXY SQUEAKY CLEAN ROOM GEN-------------
+        //rooms[0] = new Room(
+        //            new Vector2Int(Mathf.FloorToInt(sizeX / 2), Mathf.FloorToInt(sizeY / 2)),
+        //            Random.Range(minRoomDimension, maxRoomDimension),
+        //            Random.Range(minRoomDimension, maxRoomDimension),
+        //            Room.RoomType.entrance);
+
+        //corridors[0] = new Corridor(
+        //            rooms[0],
+        //            corridorLengthMax,
+        //            true);
+
+        //for (int i = 1; i < rooms.Length; i++) {
+        //    rooms[i] = new Room(corridors[i - 1].endPos,
+        //            Random.Range(minRoomDimension, maxRoomDimension),
+        //            Random.Range(minRoomDimension, maxRoomDimension),
+        //            (Room.RoomType)Random.Range(0, (int)Room.RoomType.COUNT));
+
+        //    if (i < corridors.Length) {
+        //        corridors[i] = new Corridor(rooms[i], corridorLengthMax, false);
+        //    }
+        //}
 
         //draw tiles for each room on tilemap
         Tile testTile = ScriptableObject.CreateInstance<Tile>();
@@ -113,11 +112,11 @@ public class GenerateMap : MonoBehaviour {
                 }
             }
 
-            //corridors
-            for (int x = corridors[i].startPos.x; x < corridors[i].endPos.x + corridors[i].length; x++) {
-                for (int y = corridors[i].startPos.y; y < corridors[i].endPos.y + corridors[i].length; y++) {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), testTile);
-                }
+            //STORE RANDOM TILE ON A RANDOM SIDE OF ROOM TO GEN CORRIDORS ON AND TO
+
+            //add 1 corridor between each room
+            if (i < corridors.Length) {
+                //corridors[i] = new Corridor();
             }
         }
     }

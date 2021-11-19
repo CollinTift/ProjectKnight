@@ -6,7 +6,6 @@ public class Room {
     public Vector2Int pos;
     public int width, height;
     public RoomType roomType;
-    public Corridor.Direction enteringCorDir;
 
     public enum RoomType {
         empty,
@@ -16,21 +15,15 @@ public class Room {
         entrance,
         exit,
         COUNT
-    }    
+    }
 
-    public Room(Vector2Int pos, int width, int height, RoomType roomType):this(pos, width, height, roomType, null) {}
-
-    public Room(Vector2Int pos, int width, int height, RoomType roomType, Corridor corridor) {
+    public Room(Vector2Int pos, int width, int height, RoomType roomType) {
         this.pos = pos;
 
         this.width = width;
         this.height = height;
 
         this.roomType = roomType;
-
-        if (corridor != null) {
-            enteringCorDir = corridor.direction;
-        }
     }
 
     public bool CollidesWith(Room room) {
