@@ -391,12 +391,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSprite: {fileID: 21300000, guid: d4aad733b32731b4a8fa41b069a2b862, type: 3}
   testSprite: {fileID: 21300000, guid: dbf65a3f2fe1f3b4f8280fe1b65d8732, type: 3}
-  sizeX: 100
-  sizeY: 100
-  numRooms: 10
-  minRoomDimension: 5
-  maxRoomDimension: 15
-  corridorLengthMax: 10
+  sizeX: 150
+  sizeY: 150
+  numRooms: 15
+  minRoomDimension: 10
+  maxRoomDimension: 25
   floorSprites:
   - {fileID: 21300000, guid: bc0941ee415ec5c49bdc74b686ff688f, type: 3}
   - {fileID: 21300000, guid: bf67ae5a641eb654c9943bef2f0c07f7, type: 3}

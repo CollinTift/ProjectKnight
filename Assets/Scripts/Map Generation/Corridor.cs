@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Corridor {
+    public Room startRoom;
+    public Room endRoom;
     public Vector2Int startPos;
     public Vector2Int endPos;
     public int length;

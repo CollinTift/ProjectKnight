@@ -112,11 +112,68 @@ public class GenerateMap : MonoBehaviour {
                 }
             }
 
-            //STORE RANDOM TILE ON A RANDOM SIDE OF ROOM TO GEN CORRIDORS ON AND TO
-
             //add 1 corridor between each room
             if (i < corridors.Length) {
-                //corridors[i] = new Corridor();
+                //STORE RANDOM TILE ON A SIDE OF ROOM (determined by where startRoom is in relation to endRoom) TO GEN CORRIDORS ON AND TO
+                Vector2Int startPos;
+                Vector2Int endPos;
+
+                if (rooms[i].pos.x < rooms[i + 1].pos.x) {
+                    //left
+                    if (rooms[i].pos.y < rooms[i + 1].pos.y) {
+                        //below
+                        startPos = new Vector2Int(rooms[i].pos.x + rooms[i].width - 1, Random.Range(rooms[i].pos.y, rooms[i].pos.y + rooms[i].height));
+                        endPos = new Vector2Int(Random.Range(rooms[i + 1].pos.x, rooms[i + 1].pos.x + rooms[i + 1].width), rooms[i + 1].pos.y);
+                    } else if (rooms[i].pos.y > rooms[i + 1].pos.y) {
+                        //above
+                        startPos = new Vector2Int(rooms[i].pos.x + rooms[i].width - 1, Random.Range(rooms[i].pos.y, rooms[i].pos.y + rooms[i].height));
+                        endPos = new Vector2Int(Random.Range(rooms[i + 1].pos.x, rooms[i + 1].pos.x + rooms[i + 1].width), rooms[i + 1].pos.y + rooms[i + 1].height - 1);
+                    } else {
+                        //same height
+                        startPos = new Vector2Int(rooms[i].pos.x + rooms[i].width - 1, Random.Range(rooms[i].pos.y, rooms[i].pos.y + rooms[i].height));
+                        endPos = new Vector2Int(rooms[i + 1].pos.x, Random.Range(rooms[i + 1].pos.y, rooms[i + 1].pos.y + rooms[i + 1].height));
+                    }
+                } else if (rooms[i].pos.x > rooms[i + 1].pos.x) {
+                    //right
+                    if (rooms[i].pos.y < rooms[i + 1].pos.y) {
+                        //below
+                        startPos = new Vector2Int(rooms[i].pos.x, Random.Range(rooms[i].pos.y, rooms[i].pos.y + rooms[i].height));
+                        endPos = new Vector2Int(Random.Range(rooms[i + 1].pos.x, rooms[i + 1].pos.x + rooms[i + 1].width), rooms[i + 1].pos.y);
+                    } else if (rooms[i].pos.y > rooms[i + 1].pos.y) {
+                        //above
+                        startPos = new Vector2Int(rooms[i].pos.x, Random.Range(rooms[i].pos.y, rooms[i].pos.y + rooms[i].height));
+                        endPos = new Vector2Int(Random.Range(rooms[i + 1].pos.x, rooms[i + 1].pos.x + rooms[i + 1].width), rooms[i + 1].pos.y + rooms[i + 1].height - 1);
+                    } else {
+                        //same height
+                        startPos = new Vector2Int(rooms[i].pos.x, Random.Range(rooms[i].pos.y, rooms[i].pos.y + rooms[i].height));
+                        endPos = new Vector2Int(Random.Range(rooms[i + 1].pos.x, rooms[i + 1].pos.x + rooms[i + 1].width), rooms[i + 1].pos.y);
+                    }
+                } else {
+                    //same columns
+                    if (rooms[i].pos.y < rooms[i + 1].pos.y) {
+                        //below
+                        startPos = new Vector2Int(Random.Range(rooms[i].pos.x, rooms[i].pos.x + rooms[i].width), rooms[i].pos.y + rooms[i].height - 1);
+                        endPos = new Vector2Int(Random.Range(rooms[i + 1].pos.x, rooms[i + 1].pos.x + rooms[i + 1].width), rooms[i + 1].pos.y);
+                    } else if (rooms[i].pos.y > rooms[i + 1].pos.y) {
+                        //above
+                        startPos = new Vector2Int(Random.Range(rooms[i].pos.x, rooms[i].pos.x + rooms[i].width), rooms[i].pos.y);
+                        endPos = new Vector2Int(Random.Range(rooms[i + 1].pos.x, rooms[i + 1].pos.x + rooms[i + 1].width), rooms[i + 1].pos.y + rooms[i + 1].height - 1);
+                    } else {
+                        //this will literally NEVER happen but the compiler throws a hissy fit because it thinks it's possible
+                        startPos = new Vector2Int();
+                        endPos = new Vector2Int();
+                    }
+                }
+
+                corridors[i] = new Corridor(startPos, endPos);
+            }
+        }
+
+        for (int i = 0; i < corridors.Length; i++) {
+            List<Vector2Int> corridorTiles = corridors[i].InitializeCorridor();
+
+            foreach (Vector2Int vector in corridorTiles) {
+                tilemap.SetTile(new Vector3Int(vector.x, vector.y, 0), testTile);
             }
         }
     }

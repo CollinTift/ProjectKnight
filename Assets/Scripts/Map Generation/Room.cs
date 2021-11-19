@@ -6,6 +6,7 @@ public class Room {
     public Vector2Int pos;
     public int width, height;
     public RoomType roomType;
+    public Corridor[] corridors;
 
     public enum RoomType {
         empty,
@@ -24,6 +25,12 @@ public class Room {
         this.height = height;
 
         this.roomType = roomType;
+
+        if (this.roomType == RoomType.entrance || this.roomType == RoomType.exit) {
+            corridors = new Corridor[1];
+        } else {
+            corridors = new Corridor[2];
+        }
     }
 
     public bool CollidesWith(Room room) {
