@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System.Linq;
+using Cinemachine;
 
 public class GenerateMap : MonoBehaviour {
     Tilemap tilemap;
+    GameObject vCam;
 
     [Header("Base Sprite")]
     public Sprite baseSprite;
@@ -34,6 +35,15 @@ public class GenerateMap : MonoBehaviour {
         floorTiles = InstantiateTiles(floorSprites);
 
         GenerateRooms();
+
+        vCam = GameObject.FindWithTag("MainVCam");
+
+        GameObject cameraConfiner = new GameObject("Camera Confiner");
+        cameraConfiner.transform.position = new Vector2(sizeX / 2, sizeY / 2);
+        cameraConfiner.AddComponent<BoxCollider2D>();
+        cameraConfiner.GetComponent<BoxCollider2D>().size = new Vector2(sizeX, sizeY);
+        cameraConfiner.GetComponent<BoxCollider2D>().isTrigger = true; //breaks it, figure out how to do it without making it a trigger
+        vCam.GetComponent<CinemachineConfiner>().m_BoundingShape2D = cameraConfiner.GetComponent<BoxCollider2D>();
     }
 
     private void GenerateRooms() {
@@ -76,29 +86,6 @@ public class GenerateMap : MonoBehaviour {
                 index++;
             }
         }
-
-        ////---------------NEW SEXY SQUEAKY CLEAN ROOM GEN-------------
-        //rooms[0] = new Room(
-        //            new Vector2Int(Mathf.FloorToInt(sizeX / 2), Mathf.FloorToInt(sizeY / 2)),
-        //            Random.Range(minRoomDimension, maxRoomDimension),
-        //            Random.Range(minRoomDimension, maxRoomDimension),
-        //            Room.RoomType.entrance);
-
-        //corridors[0] = new Corridor(
-        //            rooms[0],
-        //            corridorLengthMax,
-        //            true);
-
-        //for (int i = 1; i < rooms.Length; i++) {
-        //    rooms[i] = new Room(corridors[i - 1].endPos,
-        //            Random.Range(minRoomDimension, maxRoomDimension),
-        //            Random.Range(minRoomDimension, maxRoomDimension),
-        //            (Room.RoomType)Random.Range(0, (int)Room.RoomType.COUNT));
-
-        //    if (i < corridors.Length) {
-        //        corridors[i] = new Corridor(rooms[i], corridorLengthMax, false);
-        //    }
-        //}
 
         //draw tiles for each room on tilemap
         Tile testTile = ScriptableObject.CreateInstance<Tile>();

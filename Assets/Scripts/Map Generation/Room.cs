@@ -34,7 +34,7 @@ public class Room {
 
         switch (roomType) {
             case RoomType.entrance:
-                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().transform.position = new Vector3(Mathf.FloorToInt(width / 2), Mathf.FloorToInt(height / 2), 0);
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().transform.position = new Vector3(pos.x + Mathf.FloorToInt(width / 2), pos.y + Mathf.FloorToInt(height / 2), 0);
                 break;
             case RoomType.exit:
                 //spawn boss and locked doors
