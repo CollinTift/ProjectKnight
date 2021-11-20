@@ -10,7 +10,7 @@ public class Room {
 
     public enum RoomType {
         empty,
-        combat,
+        monster,
         loot,
         trap,
         entrance,
@@ -30,6 +30,17 @@ public class Room {
             corridors = new Corridor[1];
         } else {
             corridors = new Corridor[2];
+        }
+
+        switch (roomType) {
+            case RoomType.entrance:
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().transform.position = new Vector3(Mathf.FloorToInt(width / 2), Mathf.FloorToInt(height / 2), 0);
+                break;
+            case RoomType.exit:
+                //spawn boss and locked doors
+                break;
+            default:
+                break;
         }
     }
 
