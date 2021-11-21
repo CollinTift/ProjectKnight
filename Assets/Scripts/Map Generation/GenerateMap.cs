@@ -12,7 +12,8 @@ public class GenerateMap : MonoBehaviour {
 
     [Header("Base Sprite")]
     public Sprite baseSprite;
-    public Sprite testSprite;
+    public Sprite[] baseSprites;
+    private Tile[] baseTiles;
 
     [Header("Map attributes")]
     public int sizeX;
@@ -34,6 +35,8 @@ public class GenerateMap : MonoBehaviour {
         tilemap = GetComponent<Tilemap>();
         rooms = new Room[numRooms];
         corridors = new Corridor[numRooms - 1];
+
+        baseTiles = InstantiateTiles(baseSprites);
 
         ApplyBase();
 
@@ -196,13 +199,9 @@ public class GenerateMap : MonoBehaviour {
     }
 
     private void ApplyBase() {
-        Tile baseTile = ScriptableObject.CreateInstance<Tile>();
-        baseTile.sprite = baseSprite;
-        baseTile.color = Color.black;
-
         for (int x = 0; x < sizeX; x++) {
             for (int y = 0; y < sizeY; y++) {
-                tilemap.SetTile(new Vector3Int(x, y, 0), baseTile);
+                tilemap.SetTile(new Vector3Int(x, y, 0), GetBaseTileUnweighted());
             }
         }
     }
@@ -214,7 +213,16 @@ public class GenerateMap : MonoBehaviour {
             tileArray[i] = ScriptableObject.CreateInstance<Tile>();
             tileArray[i].sprite = sprites[i];
 
-            if (sprites[i] == baseSprite) {
+            bool isBase = false;
+
+            for (int j = 0; j < baseSprites.Length; j++) {
+                if (sprites[i] == baseSprites[i]) {
+                    isBase = true;
+                    break;
+                }
+            }
+
+            if (isBase) {
                 tileArray[i].colliderType = Tile.ColliderType.Sprite;
             } else {
                 tileArray[i].colliderType = Tile.ColliderType.None;
@@ -226,6 +234,10 @@ public class GenerateMap : MonoBehaviour {
 
     private Tile GetFloorTileUnweighted() {
         return floorTiles[Random.Range(0, floorTiles.Length)];
+    }
+
+    private Tile GetBaseTileUnweighted() {
+        return baseTiles[Random.Range(0, baseTiles.Length)];
     }
 
     private Tile GetFloorTileWeighted() {
