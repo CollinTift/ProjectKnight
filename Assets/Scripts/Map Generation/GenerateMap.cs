@@ -11,7 +11,6 @@ public class GenerateMap : MonoBehaviour {
     Rigidbody2D rb;
 
     [Header("Base Sprite")]
-    public Sprite baseSprite;
     public Sprite[] baseSprites;
     private Tile[] baseTiles;
 
@@ -37,6 +36,9 @@ public class GenerateMap : MonoBehaviour {
         corridors = new Corridor[numRooms - 1];
 
         baseTiles = InstantiateTiles(baseSprites);
+        for (int i = 0; i < baseTiles.Length; i++) {
+            baseTiles[i].colliderType = Tile.ColliderType.Grid;
+        }
 
         ApplyBase();
 
@@ -212,21 +214,7 @@ public class GenerateMap : MonoBehaviour {
         for (int i = 0; i < sprites.Length; i++) {
             tileArray[i] = ScriptableObject.CreateInstance<Tile>();
             tileArray[i].sprite = sprites[i];
-
-            bool isBase = false;
-
-            for (int j = 0; j < baseSprites.Length; j++) {
-                if (sprites[i] == baseSprites[j]) {
-                    isBase = true;
-                    break;
-                }
-            }
-
-            if (isBase) {
-                tileArray[i].colliderType = Tile.ColliderType.Sprite;
-            } else {
-                tileArray[i].colliderType = Tile.ColliderType.None;
-            }
+            tileArray[i].colliderType = Tile.ColliderType.None;
         }
 
         return tileArray;
