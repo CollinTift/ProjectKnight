@@ -216,7 +216,7 @@ public class GenerateMap : MonoBehaviour {
             bool isBase = false;
 
             for (int j = 0; j < baseSprites.Length; j++) {
-                if (sprites[i] == baseSprites[i]) {
+                if (sprites[i] == baseSprites[j]) {
                     isBase = true;
                     break;
                 }
@@ -241,7 +241,7 @@ public class GenerateMap : MonoBehaviour {
     }
 
     private Tile GetFloorTileWeighted() {
-        float randVal = Random.Range(0f, 100f);
+        float randVal = Random.Range(0f, totalWeight);
 
         for (int i = 0; i < actualWeights.Length; i++) {
             if (i == 0) {
@@ -256,7 +256,7 @@ public class GenerateMap : MonoBehaviour {
         }
 
         //literally impossible but compiler throwing hissy fit yet again
-        //nevermind apparently its always this rip
+        //nevermind apparently its almost always this rip
         return floorTiles[0];
     }
 
