@@ -27,7 +27,7 @@ public class GenerateMap : MonoBehaviour {
     public Sprite[] floorSprites;
     public int[] floorWeights;
     private Tile[] floorTiles;
-    private int totalWeight;
+    private float totalWeight;
     private float[] actualWeights;
 
     private void Awake() {
@@ -39,7 +39,7 @@ public class GenerateMap : MonoBehaviour {
 
         floorTiles = InstantiateTiles(floorSprites);
 
-        totalWeight = 0;
+        totalWeight = 0f;
         for (int i = 0; i < floorWeights.Length; i++) {
             totalWeight += floorWeights[i];
         }
@@ -49,7 +49,7 @@ public class GenerateMap : MonoBehaviour {
             if (i == 0) {
                 actualWeights[i] = floorWeights[i] / totalWeight;
             } else {
-                actualWeights[i] = floorWeights[i] / totalWeight + actualWeights[i - 1];
+                actualWeights[i] = (floorWeights[i] / totalWeight) + actualWeights[i - 1];
             }
         }
 
