@@ -7,6 +7,8 @@ using Cinemachine;
 public class GenerateMap : MonoBehaviour {
     Tilemap tilemap;
     GameObject vCam;
+    TilemapCollider2D tc;
+    Rigidbody2D rb;
 
     [Header("Base Sprite")]
     public Sprite baseSprite;
@@ -23,7 +25,10 @@ public class GenerateMap : MonoBehaviour {
 
     [Header("Tile Sprites")]
     public Sprite[] floorSprites;
+    public int[] floorWeights;
     private Tile[] floorTiles;
+    private int totalWeight;
+    private float[] actualWeights;
 
     private void Awake() {
         tilemap = GetComponent<Tilemap>();
@@ -34,16 +39,45 @@ public class GenerateMap : MonoBehaviour {
 
         floorTiles = InstantiateTiles(floorSprites);
 
+        totalWeight = 0;
+        for (int i = 0; i < floorWeights.Length; i++) {
+            totalWeight += floorWeights[i];
+        }
+
+        actualWeights = new float[floorWeights.Length];
+        for (int i = 0; i < actualWeights.Length; i++) {
+            if (i == 0) {
+                actualWeights[i] = floorWeights[i] / totalWeight;
+            } else {
+                actualWeights[i] = floorWeights[i] / totalWeight + actualWeights[i - 1];
+            }
+        }
+
         GenerateRooms();
+
+        rb = gameObject.AddComponent<Rigidbody2D>();
+        tc = gameObject.AddComponent<TilemapCollider2D>();
+        gameObject.AddComponent<CompositeCollider2D>();
+
+        tc.usedByComposite = true;
+        rb.bodyType = RigidbodyType2D.Static;
 
         vCam = GameObject.FindWithTag("MainVCam");
 
         GameObject cameraConfiner = new GameObject("Camera Confiner");
-        cameraConfiner.transform.position = new Vector2(sizeX / 2, sizeY / 2);
-        cameraConfiner.AddComponent<BoxCollider2D>();
-        cameraConfiner.GetComponent<BoxCollider2D>().size = new Vector2(sizeX, sizeY);
-        cameraConfiner.GetComponent<BoxCollider2D>().isTrigger = true; //breaks it, figure out how to do it without making it a trigger
-        vCam.GetComponent<CinemachineConfiner>().m_BoundingShape2D = cameraConfiner.GetComponent<BoxCollider2D>();
+        cameraConfiner.layer = 6; //camera confiner layer
+        cameraConfiner.transform.position = Vector3.zero;
+        cameraConfiner.AddComponent<PolygonCollider2D>();
+
+        PolygonCollider2D pc = cameraConfiner.GetComponent<PolygonCollider2D>();
+        pc.points = new Vector2[4] {
+            new Vector2(0, 0),
+            new Vector2(sizeX, 0),
+            new Vector2(sizeX, sizeY),
+            new Vector2(0, sizeY)
+        };
+
+        vCam.GetComponent<CinemachineConfiner>().m_BoundingShape2D = pc;
     }
 
     private void GenerateRooms() {
@@ -87,15 +121,11 @@ public class GenerateMap : MonoBehaviour {
             }
         }
 
-        //draw tiles for each room on tilemap
-        Tile testTile = ScriptableObject.CreateInstance<Tile>();
-        testTile.sprite = testSprite;
-
         for (int i = 0; i < numRooms; i++) {
             //rooms
             for (int x = rooms[i].pos.x; x < rooms[i].pos.x + rooms[i].width; x++) {
                 for (int y = rooms[i].pos.y; y < rooms[i].pos.y + rooms[i].height; y++) {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), testTile);
+                    tilemap.SetTile(new Vector3Int(x, y, 0), GetFloorTileWeighted());
                 }
             }
 
@@ -160,7 +190,7 @@ public class GenerateMap : MonoBehaviour {
             List<Vector2Int> corridorTiles = corridors[i].InitializeCorridor();
 
             foreach (Vector2Int vector in corridorTiles) {
-                tilemap.SetTile(new Vector3Int(vector.x, vector.y, 0), testTile);
+                tilemap.SetTile(new Vector3Int(vector.x, vector.y, 0), GetFloorTileWeighted());
             }
         }
     }
@@ -183,9 +213,39 @@ public class GenerateMap : MonoBehaviour {
         for (int i = 0; i < sprites.Length; i++) {
             tileArray[i] = ScriptableObject.CreateInstance<Tile>();
             tileArray[i].sprite = sprites[i];
+
+            if (sprites[i] == baseSprite) {
+                tileArray[i].colliderType = Tile.ColliderType.Sprite;
+            } else {
+                tileArray[i].colliderType = Tile.ColliderType.None;
+            }
         }
 
         return tileArray;
+    }
+
+    private Tile GetFloorTileUnweighted() {
+        return floorTiles[Random.Range(0, floorTiles.Length)];
+    }
+
+    private Tile GetFloorTileWeighted() {
+        float randVal = Random.Range(0f, 100f);
+
+        for (int i = 0; i < actualWeights.Length; i++) {
+            if (i == 0) {
+                if (randVal < actualWeights[0] && randVal >= 0f) {
+                    return floorTiles[0];
+                }
+            } else {
+                if (randVal < actualWeights[i] && randVal >= actualWeights[i - 1]) {
+                    return floorTiles[i];
+                }
+            }
+        }
+
+        //literally impossible but compiler throwing hissy fit yet again
+        //nevermind apparently its always this rip
+        return floorTiles[0];
     }
 
     //loop through each pixel per tile and create new texture2D to return and apply to a tile for procedural generation!!!!
