@@ -28,12 +28,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        Vector2 pos = rb.position;
-
-        pos.x = pos.x + speed * hor * Time.deltaTime;
-        pos.y = pos.y + speed * ver * Time.deltaTime;
-
-        rb.MovePosition(pos);
+        rb.velocity = new Vector2(hor * speed, ver * speed);
     }
 
     private void Move() {
