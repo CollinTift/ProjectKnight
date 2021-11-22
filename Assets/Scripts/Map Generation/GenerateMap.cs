@@ -11,10 +11,12 @@ public class GenerateMap : MonoBehaviour {
     Rigidbody2D rb;
 
     [Header("Base Sprite")]
-    //Must be a 9x9 grid, in the following layout left to right top to bottom:
+    //Must be a 3x5 grid, in the following layout left to right top to bottom:
     //Top left corner, top edge, top right corner,
     //left edge, BASE SPRITE WITHOUT WALL, right edge,
     //Bot left corner, bot edge, bot right corner
+    //Inverse top left corner, inverse top right corner, inverse bot left corner
+    //Inverse bot right corner, double horizontal, double vertical
     public Sprite[] baseSprites;
     private Tile[] baseTiles;
 
@@ -215,7 +217,7 @@ public class GenerateMap : MonoBehaviour {
     }
 
     private void UpdateBaseTiles() {
-        Vector3Int Up, Left, Down, Right;
+        Vector3Int upLeft, up, upRight, left, right, downLeft, down, downRight;
         for (int x = 0; x < sizeX; x++) {
             for (int y = 0; y < sizeY; y++) {
                 Vector3Int tilePos = new Vector3Int(x, y, 0);
@@ -230,31 +232,55 @@ public class GenerateMap : MonoBehaviour {
                 }
 
                 if (!isFloor) {
+                    bool hasUpLeft = false;
                     bool hasUp = false;
+                    bool hasUpRight = false;
                     bool hasLeft = false;
-                    bool hasDown = false;
                     bool hasRight = false;
+                    bool hasDownLeft = false;
+                    bool hasDown = false;
+                    bool hasDownRight = false;
 
-                    Up = new Vector3Int(x, y + 1, 0);
-                    Left = new Vector3Int(x - 1, y, 0);
-                    Down = new Vector3Int(x, y - 1, 0);
-                    Right = new Vector3Int(x + 1, y, 0);
+                    upLeft = new Vector3Int(x - 1, y + 1, 0);
+                    up = new Vector3Int(x, y + 1, 0);
+                    upRight = new Vector3Int(x + 1, y + 1, 0);
+                    left = new Vector3Int(x - 1, y, 0);
+                    right = new Vector3Int(x + 1, y, 0);
+                    downLeft = new Vector3Int(x - 1, y - 1, 0);
+                    down = new Vector3Int(x, y - 1, 0);
+                    downRight = new Vector3Int(x + 1, y - 1, 0);                    
 
                     for (int i = 0; i < floorTiles.Length; i++) {
-                        if (tilemap.HasTile(Up) && tilemap.GetTile(Up) == floorTiles[i]) {
+                        if (tilemap.HasTile(upLeft) && tilemap.GetTile(upLeft) == floorTiles[i]) {
+                            hasUpLeft = true;
+                        }
+
+                        if (tilemap.HasTile(up) && tilemap.GetTile(up) == floorTiles[i]) {
                             hasUp = true;
                         }
 
-                        if (tilemap.HasTile(Left) && tilemap.GetTile(Left) == floorTiles[i]) {
+                        if (tilemap.HasTile(upRight) && tilemap.GetTile(upRight) == floorTiles[i]) {
+                            hasUpRight = true;
+                        }
+
+                        if (tilemap.HasTile(left) && tilemap.GetTile(left) == floorTiles[i]) {
                             hasLeft = true;
                         }
 
-                        if (tilemap.HasTile(Down) && tilemap.GetTile(Down) == floorTiles[i]) {
+                        if (tilemap.HasTile(right) && tilemap.GetTile(right) == floorTiles[i]) {
+                            hasRight = true;
+                        }
+
+                        if (tilemap.HasTile(downLeft) && tilemap.GetTile(downLeft) == floorTiles[i]) {
+                            hasDownLeft = true;
+                        }
+
+                        if (tilemap.HasTile(down) && tilemap.GetTile(down) == floorTiles[i]) {
                             hasDown = true;
                         }
 
-                        if (tilemap.HasTile(Right) && tilemap.GetTile(Right) == floorTiles[i]) {
-                            hasRight = true;
+                        if (tilemap.HasTile(downRight) && tilemap.GetTile(downRight) == floorTiles[i]) {
+                            hasDownRight = true;
                         }
                     }
 
@@ -265,6 +291,9 @@ public class GenerateMap : MonoBehaviour {
                         } else if (hasRight) {
                             //top right
                             tilemap.SetTile(tilePos, baseTiles[2]);
+                        } else if (hasDown) {
+                            //double hor
+                            tilemap.SetTile(tilePos, baseTiles[13]);
                         } else {
                             //top
                             tilemap.SetTile(tilePos, baseTiles[1]);
@@ -281,11 +310,28 @@ public class GenerateMap : MonoBehaviour {
                             tilemap.SetTile(tilePos, baseTiles[7]);
                         }
                     } else if (hasLeft) {
-                        //left
-                        tilemap.SetTile(tilePos, baseTiles[3]);
+                        if (hasRight) {
+                            //double vert
+                            tilemap.SetTile(tilePos, baseTiles[14]);
+                        } else {
+                            //left
+                            tilemap.SetTile(tilePos, baseTiles[3]);
+                        }
                     } else if (hasRight) {
                         //right
                         tilemap.SetTile(tilePos, baseTiles[5]);
+                    } else if (hasUpLeft) {
+                        //up left
+                        tilemap.SetTile(tilePos, baseTiles[9]);
+                    } else if (hasUpRight) {
+                        //up right
+                        tilemap.SetTile(tilePos, baseTiles[10]);
+                    } else if (hasDownLeft) {
+                        //down left
+                        tilemap.SetTile(tilePos, baseTiles[11]);
+                    } else if (hasDownRight) {
+                        //down right
+                        tilemap.SetTile(tilePos, baseTiles[12]);
                     } else {
                         //center
                         tilemap.SetTile(tilePos, baseTiles[4]);

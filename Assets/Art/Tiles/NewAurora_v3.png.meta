@@ -1,52 +1,52 @@
 fileFormatVersion: 2
-guid: 9bf63731e31bf4b48b0448950f7f0ae6
+guid: 9ea6ae9ccc45acc438db6f76a577bbd6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5184602438202476899
-    second: NewAurora_v2_0
+      213: -5131410266184482510
+    second: NewAurora_v3_0
   - first:
-      213: -7261067156853853956
-    second: NewAurora_v2_1
+      213: 3735819693519868184
+    second: NewAurora_v3_1
   - first:
-      213: 469247361522625922
-    second: NewAurora_v2_2
+      213: -2165571345295763495
+    second: NewAurora_v3_2
   - first:
-      213: 2412783526174253029
-    second: NewAurora_v2_3
+      213: -7504537772135143459
+    second: NewAurora_v3_3
   - first:
-      213: -5542675796164886144
-    second: NewAurora_v2_4
+      213: 3824164509102357807
+    second: NewAurora_v3_4
   - first:
-      213: 9094104418268465126
-    second: NewAurora_v2_5
+      213: -3750302832731223688
+    second: NewAurora_v3_5
   - first:
-      213: -400432015004292401
-    second: NewAurora_v2_6
+      213: -6363659960055623315
+    second: NewAurora_v3_6
   - first:
-      213: 6866548715229265441
-    second: NewAurora_v2_7
+      213: -8594024218831697312
+    second: NewAurora_v3_7
   - first:
-      213: 2242601200231616252
-    second: NewAurora_v2_8
+      213: -4173011070743694460
+    second: NewAurora_v3_8
   - first:
-      213: 1203861371839022068
-    second: NewAurora_v2_9
+      213: -2233836375207325574
+    second: NewAurora_v3_9
   - first:
-      213: 7867729365995009469
-    second: NewAurora_v2_10
+      213: 4709299394928186627
+    second: NewAurora_v3_10
   - first:
-      213: -5560054954684667597
-    second: NewAurora_v2_11
+      213: 1303290602829079358
+    second: NewAurora_v3_11
   - first:
-      213: -8004441859250028230
-    second: NewAurora_v2_12
+      213: -2220452024224219132
+    second: NewAurora_v3_12
   - first:
-      213: -8214179971902039884
-    second: NewAurora_v2_13
+      213: 6224844968285270226
+    second: NewAurora_v3_13
   - first:
-      213: -7109881308438592755
-    second: NewAurora_v2_14
+      213: 2659318863468640080
+    second: NewAurora_v3_14
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -148,7 +148,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NewAurora_v2_0
+      name: NewAurora_v3_0
       rect:
         serializedVersion: 2
         x: 0
@@ -162,14 +162,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9631593d879c08b0800000000000000
-      internalID: -5184602438202476899
+      spriteID: 231084fdc8199c8b0800000000000000
+      internalID: -5131410266184482510
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewAurora_v2_1
+      name: NewAurora_v3_1
       rect:
         serializedVersion: 2
         x: 16
@@ -183,14 +183,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf0787144e18b3b90800000000000000
-      internalID: -7261067156853853956
+      spriteID: 8111921d73c48d330800000000000000
+      internalID: 3735819693519868184
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewAurora_v2_2
+      name: NewAurora_v3_2
       rect:
         serializedVersion: 2
         x: 32
@@ -204,14 +204,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28d68573df9138600800000000000000
-      internalID: 469247361522625922
+      spriteID: 9d791ebc55852f1e0800000000000000
+      internalID: -2165571345295763495
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewAurora_v2_3
+      name: NewAurora_v3_3
       rect:
         serializedVersion: 2
         x: 0
@@ -225,14 +225,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5efd78565ddeb7120800000000000000
-      internalID: 2412783526174253029
+      spriteID: dd7226038a68ad790800000000000000
+      internalID: -7504537772135143459
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewAurora_v2_4
+      name: NewAurora_v3_4
       rect:
         serializedVersion: 2
         x: 16
@@ -246,14 +246,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 081cf60dab57413b0800000000000000
-      internalID: -5542675796164886144
+      spriteID: f2db3b71c59221530800000000000000
+      internalID: 3824164509102357807
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewAurora_v2_5
+      name: NewAurora_v3_5
       rect:
         serializedVersion: 2
         x: 32
@@ -267,14 +267,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e7c33929cfb43e70800000000000000
-      internalID: 9094104418268465126
+      spriteID: 8790aee817f34fbc0800000000000000
+      internalID: -3750302832731223688
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewAurora_v2_6
+      name: NewAurora_v3_6
       rect:
         serializedVersion: 2
         x: 0
@@ -288,14 +288,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fcaa9f43431617af0800000000000000
-      internalID: -400432015004292401
+      spriteID: d6112818bfcbfa7a0800000000000000
+      internalID: -6363659960055623315
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewAurora_v2_7
+      name: NewAurora_v3_7
       rect:
         serializedVersion: 2
         x: 16
@@ -309,14 +309,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12eb72c0da1ea4f50800000000000000
-      internalID: 6866548715229265441
+      spriteID: 06ace6d8184ebb880800000000000000
+      internalID: -8594024218831697312
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewAurora_v2_8
+      name: NewAurora_v3_8
       rect:
         serializedVersion: 2
         x: 32
@@ -330,14 +330,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cfe8ba8e8e15f1f10800000000000000
-      internalID: 2242601200231616252
+      spriteID: 483bc8c6a8c7616c0800000000000000
+      internalID: -4173011070743694460
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewAurora_v2_9
+      name: NewAurora_v3_9
       rect:
         serializedVersion: 2
         x: 0
@@ -351,14 +351,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f387431a89f4b010800000000000000
-      internalID: 1203861371839022068
+      spriteID: a70db61f6a1dff0e0800000000000000
+      internalID: -2233836375207325574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewAurora_v2_10
+      name: NewAurora_v3_10
       rect:
         serializedVersion: 2
         x: 16
@@ -372,14 +372,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db5ba016c2acf2d60800000000000000
-      internalID: 7867729365995009469
+      spriteID: 30518a749daca5140800000000000000
+      internalID: 4709299394928186627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewAurora_v2_11
+      name: NewAurora_v3_11
       rect:
         serializedVersion: 2
         x: 32
@@ -393,14 +393,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 339ae562a77b6d2b0800000000000000
-      internalID: -5560054954684667597
+      spriteID: e336bbce5e7361210800000000000000
+      internalID: 1303290602829079358
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewAurora_v2_12
+      name: NewAurora_v3_12
       rect:
         serializedVersion: 2
         x: 0
@@ -414,14 +414,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a318222d9828ae090800000000000000
-      internalID: -8004441859250028230
+      spriteID: 400815ff5ae5f21e0800000000000000
+      internalID: -2220452024224219132
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewAurora_v2_13
+      name: NewAurora_v3_13
       rect:
         serializedVersion: 2
         x: 16
@@ -435,14 +435,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b896ad06de510e80800000000000000
-      internalID: -8214179971902039884
+      spriteID: 2d0758c9487136650800000000000000
+      internalID: 6224844968285270226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewAurora_v2_14
+      name: NewAurora_v3_14
       rect:
         serializedVersion: 2
         x: 32
@@ -456,8 +456,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d030457ae90a45d90800000000000000
-      internalID: -7109881308438592755
+      spriteID: 0573b89aa6cc7e420800000000000000
+      internalID: 2659318863468640080
       vertices: []
       indices: 
       edges: []
