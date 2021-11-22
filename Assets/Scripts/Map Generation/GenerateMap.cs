@@ -91,6 +91,8 @@ public class GenerateMap : MonoBehaviour {
         };
 
         vCam.GetComponent<CinemachineConfiner>().m_BoundingShape2D = pc;
+
+        SpawnEnemies();
     }
 
     private void GenerateRooms() {
@@ -204,6 +206,14 @@ public class GenerateMap : MonoBehaviour {
 
             foreach (Vector2Int vector in corridorTiles) {
                 tilemap.SetTile(new Vector3Int(vector.x, vector.y, 0), GetFloorTileWeighted());
+            }
+        }
+    }
+
+    private void SpawnEnemies() {
+        foreach (Room room in rooms) {
+            if (room.roomType == Room.RoomType.monster) {
+                Enemy.SpawnEnemy(new Vector3(Random.Range(room.pos.x, room.pos.x + room.width) + .5f, Random.Range(room.pos.y, room.pos.y + room.height) + .5f, 0), Enemy.EnemyType.Slime);
             }
         }
     }
