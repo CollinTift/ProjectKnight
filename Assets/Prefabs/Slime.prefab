@@ -47,7 +47,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  speed: 1
   type: 0
+  attackRange: 1
+  attackCD: 2.5
+  attackDamage: 1
 --- !u!50 &399819612150241151
 Rigidbody2D:
   serializedVersion: 4

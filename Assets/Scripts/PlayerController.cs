@@ -15,11 +15,15 @@ public class PlayerController : MonoBehaviour {
 
     public static PlayerController Instance { get; private set; }
 
+    public int maxHealth = 10;
+    private int currentHealth;
+
     void Awake() {
         Instance = this;
 
         rb = GetComponent<Rigidbody2D>();
 
+        currentHealth = maxHealth;
         lookDir = new Vector2(1, 0);
     }
 
@@ -40,5 +44,21 @@ public class PlayerController : MonoBehaviour {
             lookDir.Set(move.x, move.y);
             lookDir.Normalize();
         }
+    }
+
+    public void Damage(int damage) {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0) {
+            Die();
+        }
+    }
+
+    private void Die() {
+        Debug.Log("Game Over");
+    }
+
+    public Vector2 GetPosition() {
+        return transform.position;
     }
 }
