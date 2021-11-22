@@ -374,7 +374,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.040463343}
+  m_Offset: {x: 0, y: -0.14788948}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -385,7 +385,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.3159562}
+  m_Size: {x: 0.5, y: 0.2394822}
   m_EdgeRadius: 0
 --- !u!50 &348899052
 Rigidbody2D:
@@ -572,9 +572,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSprites:
-  - {fileID: 2197588795804287116, guid: 29dd14d413a8a3c47a5101f4a571e63e, type: 3}
-  - {fileID: 1513977319437992846, guid: 29dd14d413a8a3c47a5101f4a571e63e, type: 3}
-  - {fileID: -332257458136822341, guid: 29dd14d413a8a3c47a5101f4a571e63e, type: 3}
+  - {fileID: -5184602438202476899, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
+  - {fileID: -7261067156853853956, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
+  - {fileID: 469247361522625922, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
+  - {fileID: 2412783526174253029, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
+  - {fileID: -5542675796164886144, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
+  - {fileID: 9094104418268465126, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
+  - {fileID: -400432015004292401, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
+  - {fileID: 6866548715229265441, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
+  - {fileID: 2242601200231616252, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
+  - {fileID: 1203861371839022068, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
+  - {fileID: 7867729365995009469, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
+  - {fileID: -5560054954684667597, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
+  - {fileID: -8004441859250028230, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
+  - {fileID: -8214179971902039884, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
+  - {fileID: -7109881308438592755, guid: 9bf63731e31bf4b48b0448950f7f0ae6, type: 3}
   sizeX: 150
   sizeY: 150
   numRooms: 15
