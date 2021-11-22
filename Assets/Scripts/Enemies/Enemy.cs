@@ -44,21 +44,19 @@ public class Enemy : MonoBehaviour {
     }
 
     public static void SpawnEnemy(Vector3 worldPos, EnemyType type) {
-        Transform enemyTransform;
-
         switch (type) {
             default:
             case EnemyType.Slime:
-                enemyTransform = Instantiate(EnemyAssets.Instance.slimePrefab, worldPos, Quaternion.identity);
+                Instantiate(EnemyAssets.Instance.slimePrefab, worldPos, Quaternion.identity);
                 break;
             case EnemyType.Stalker:
-                enemyTransform = Instantiate(EnemyAssets.Instance.stalkerPrefab, worldPos, Quaternion.identity);
+                Instantiate(EnemyAssets.Instance.stalkerPrefab, worldPos, Quaternion.identity);
                 break;
             case EnemyType.Knight:
-                enemyTransform = Instantiate(EnemyAssets.Instance.knightPrefab, worldPos, Quaternion.identity);
+                Instantiate(EnemyAssets.Instance.knightPrefab, worldPos, Quaternion.identity);
                 break;
             case EnemyType.KnightCaptain:
-                enemyTransform = Instantiate(EnemyAssets.Instance.knightCaptainPrefab, worldPos, Quaternion.identity);
+                Instantiate(EnemyAssets.Instance.knightCaptainPrefab, worldPos, Quaternion.identity);
                 break;
         }
     }
@@ -78,12 +76,20 @@ public class Enemy : MonoBehaviour {
             attackTimer += Time.deltaTime;
         }
 
+        //Debug.Log(state.ToString());
+
         switch (state) {
             default:
             case State.Roaming:
-                MoveTo(roamPos);
+                //Vector3Int roamPosTileCoords = new Vector3Int(Mathf.FloorToInt(roamPos.x), Mathf.FloorToInt(roamPos.y), 0);
 
-                reachedPosDist = .5f;
+                if (Pathfinding.Instance.GetGrid().GetGridObject(roamPos).isWalkable) {
+                    MoveTo(roamPos);
+                } else {
+                    roamPos = GetRoamingPos();
+                }
+
+                reachedPosDist = 1f;
                 if (Vector3.Distance(transform.position, roamPos) < reachedPosDist) {
                     roamPos = GetRoamingPos();
                 }
@@ -147,10 +153,10 @@ public class Enemy : MonoBehaviour {
         if (pathVectorList != null) {
             Vector3 targetPos = pathVectorList[currentPathIndex];
 
-            if (Vector3.Distance(transform.position, targetPos) > .1f) {
-                Vector3 moveDir = (targetPos - transform.position).normalized;
+            float distanceBefore = Vector3.Distance(transform.position, targetPos);
 
-                //float distanceBefore = Vector3.Distance(transform.position, targetPos);
+            if (distanceBefore > .1f) {
+                Vector3 moveDir = (targetPos - transform.position).normalized;
 
                 transform.position = transform.position + moveDir * speed * Time.deltaTime;
             } else {
@@ -159,6 +165,8 @@ public class Enemy : MonoBehaviour {
                     StopMoving();
                 }
             }
+        } else {
+            Debug.Log("no");
         }
     }
 
