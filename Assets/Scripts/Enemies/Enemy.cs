@@ -175,7 +175,7 @@ public class Enemy : MonoBehaviour {
     }
 
     private Vector3 GetRoamingPos() {
-        Vector3 randDir = new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), 0).normalized;
+        Vector3 randDir = new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f)).normalized;
 
         return homePos + randDir * Random.Range(5f, 10f);
     }
