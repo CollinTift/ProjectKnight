@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Pathfinding;
 
 public class Enemy : MonoBehaviour {
     [Header("Health")]
@@ -61,6 +62,10 @@ public class Enemy : MonoBehaviour {
     private void Awake() {
         state = State.Roaming;
         currentHealth = maxHealth;
+
+        //for now
+        AIDestinationSetter aIDestinationSetter = gameObject.GetComponent<AIDestinationSetter>();
+        aIDestinationSetter.target = PlayerController.Instance.gameObject.transform;
     }
 
     private void Start() {
@@ -76,24 +81,9 @@ public class Enemy : MonoBehaviour {
         switch (state) {
             default:
             case State.Roaming:
-                //get roaming position and move towards
-                if (Vector2.Distance(transform.position, roamPos) < .5f) {
-                    roamPos = new Vector2(Random.Range(0f, 1f), Random.Range(0f, 1f)).normalized * detectionRange;
-                }
-
-                //call a* poathfinding
-
-                transform.position = Vector2.MoveTowards(transform.position, roamPos, speed * Time.deltaTime);
-
                 break;
             case State.Chasing:
                 //if player is in detection range, go to them
-                float distance = Vector2.Distance(PlayerController.Instance.GetPosition(), transform.position);
-
-                if (distance < detectionRange) {
-                    transform.position = Vector2.MoveTowards(transform.position, PlayerController.Instance.GetPosition(), speed * Time.deltaTime);
-                }
-
                 break;
             case State.Attacking:
                 //play attack anim and raycast in lookDir to attackRange; deal damage if hit player
@@ -121,4 +111,5 @@ public class Enemy : MonoBehaviour {
     }
 
     //IMPLEMENT ***BASIC*** A* pathfinding
+    //it was not basic
 }
