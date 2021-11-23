@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Enemy : MonoBehaviour {
     [Header("Health")]
@@ -17,10 +18,6 @@ public class Enemy : MonoBehaviour {
 
     private Vector2 lookdir = new Vector2(1, 0);
 
-    private int currentPathIndex;
-    private List<Vector3> pathVectorList;
-
-    private float reachedPosDist = 1f;
     private float detectionRange = 3f;
 
     public float attackRange = 1f;
@@ -28,6 +25,11 @@ public class Enemy : MonoBehaviour {
     public int attackDamage = 1;
 
     private float attackTimer = 0f;
+
+    private Tilemap map;
+
+    private List<Tile> openList;
+    private List<Tile> closedList;
 
     public enum EnemyType {
         Slime,
@@ -64,11 +66,12 @@ public class Enemy : MonoBehaviour {
     private void Awake() {
         state = State.Roaming;
         currentHealth = maxHealth;
+        map = GameObject.FindWithTag("Map").GetComponent<Tilemap>();
     }
 
     private void Start() {
         homePos = transform.position;
-        roamPos = GetRoamingPos();
+        //roamPos = GetRoamingPos();
     }
 
     private void Update() {
@@ -76,62 +79,41 @@ public class Enemy : MonoBehaviour {
             attackTimer += Time.deltaTime;
         }
 
-        //Debug.Log(state.ToString());
-
         switch (state) {
             default:
             case State.Roaming:
-                //Vector3Int roamPosTileCoords = new Vector3Int(Mathf.FloorToInt(roamPos.x), Mathf.FloorToInt(roamPos.y), 0);
-
-                if (Pathfinding.Instance.GetGrid().GetGridObject(roamPos).isWalkable) {
-                    MoveTo(roamPos);
-                } else {
-                    roamPos = GetRoamingPos();
+                //get roaming position and move towards
+                if (Vector2.Distance(transform.position, roamPos) < .5f) {
+                    roamPos = new Vector2(Random.Range(0f, 1f), Random.Range(0f, 1f)).normalized * detectionRange;
                 }
 
-                reachedPosDist = 1f;
-                if (Vector3.Distance(transform.position, roamPos) < reachedPosDist) {
-                    roamPos = GetRoamingPos();
-                }
+                //call a* poathfinding
 
-                FindTarget();
+                transform.position = Vector2.MoveTowards(transform.position, roamPos, speed * Time.deltaTime);
+
                 break;
             case State.Chasing:
-                MoveTo(PlayerController.Instance.GetPosition());
+                //if player is in detection range, go to them
+                float distance = Vector2.Distance(PlayerController.Instance.GetPosition(), transform.position);
 
-                if (Vector3.Distance(transform.position, PlayerController.Instance.GetPosition()) <= attackRange) {
-                    if (attackTimer >= attackCD) {
-                        StopMoving();
-
-                        PlayerController.Instance.Damage(attackDamage);
-                        attackTimer = 0f;
-                    }
+                if (distance < detectionRange) {
+                    transform.position = Vector2.MoveTowards(transform.position, PlayerController.Instance.GetPosition(), speed * Time.deltaTime);
                 }
 
-                if (Vector3.Distance(transform.position, PlayerController.Instance.GetPosition()) > detectionRange) {
-                    state = State.Returning;
-                }
                 break;
             case State.Attacking:
+                //play attack anim and raycast in lookDir to attackRange; deal damage if hit player
                 break;
             case State.Returning:
-                MoveTo(homePos);
-
-                reachedPosDist = 1f;
-                if (Vector3.Distance(transform.position, homePos) < reachedPosDist) {
-                    state = State.Roaming;
-                }
-
-                if (Vector3.Distance(transform.position, PlayerController.Instance.GetPosition()) < detectionRange) {
-                    state = State.Chasing;
-                }
-
+                //move to home position
                 break;
         }
     }
 
     public void Damage(int damage) {
         currentHealth -= damage;
+
+        //apply damaged animation (change color as well)
 
         if (currentHealth <= 0) {
             Die();
@@ -144,54 +126,5 @@ public class Enemy : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    private void MoveTo(Vector3 targetPos) {
-        SetTargetPosition(targetPos);
-        HandleMovement();
-    }
-
-    private void HandleMovement() {
-        if (pathVectorList != null) {
-            Vector3 targetPos = pathVectorList[currentPathIndex];
-
-            float distanceBefore = Vector3.Distance(transform.position, targetPos);
-
-            if (distanceBefore > .1f) {
-                Vector3 moveDir = (targetPos - transform.position).normalized;
-
-                transform.position = transform.position + moveDir * speed * Time.deltaTime;
-            } else {
-                currentPathIndex++;
-                if (currentPathIndex >= pathVectorList.Count) {
-                    StopMoving();
-                }
-            }
-        } else {
-            Debug.Log("no");
-        }
-    }
-
-    private void StopMoving() {
-        pathVectorList = null;
-    }
-
-    private Vector3 GetRoamingPos() {
-        Vector3 randDir = new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f)).normalized;
-
-        return homePos + randDir * Random.Range(5f, 10f);
-    }
-
-    private void FindTarget() {
-        if (Vector3.Distance(transform.position, PlayerController.Instance.GetPosition()) < detectionRange) {
-            state = State.Chasing;
-        }
-    }
-
-    public void SetTargetPosition(Vector3 targetPos) {
-        currentPathIndex = 0;
-        pathVectorList = Pathfinding.Instance.FindPath(transform.position, targetPos);
-
-        if (pathVectorList != null && pathVectorList.Count > 1) {
-            pathVectorList.RemoveAt(0);
-        }
-    }
+    //IMPLEMENT ***BASIC*** A* pathfinding
 }

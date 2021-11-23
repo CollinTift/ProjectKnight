@@ -10,8 +10,6 @@ public class GenerateMap : MonoBehaviour {
     TilemapCollider2D tc;
     Rigidbody2D rb;
 
-    private Pathfinding pathfinding;
-
     [Header("Base Sprite")]
     //Must be a 3x5 grid, in the following layout left to right top to bottom:
     //Top left corner, top edge, top right corner,
@@ -95,29 +93,6 @@ public class GenerateMap : MonoBehaviour {
         vCam.GetComponent<CinemachineConfiner>().m_BoundingShape2D = pc;
 
         SpawnEnemies();
-    }
-
-    private void Start() {
-        pathfinding = new Pathfinding(sizeX, sizeY);
-
-        for (int x = 0; x < sizeX; x++) {
-            for (int y = 0; y < sizeY; y++) {
-                bool isWalkable = false;
-
-                for (int i = 0; i < floorTiles.Length; i++) {
-                    if (tilemap.GetTile(new Vector3Int(x, y, 0)) == floorTiles[i]) {
-                        isWalkable = true;
-                        break;
-                    }
-                }
-
-                if (isWalkable) {
-                    pathfinding.GetGrid().GetGridObject(x, y).SetIsWalkable(true);
-                } else {
-                    pathfinding.GetGrid().GetGridObject(x, y).SetIsWalkable(false);
-                }
-            }
-        }
     }
 
     private void GenerateRooms() {

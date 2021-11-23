@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("Game Over");
     }
 
-    public Vector2 GetPosition() {
+    public Vector3 GetPosition() {
         return transform.position;
     }
 }
