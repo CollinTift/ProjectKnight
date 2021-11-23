@@ -26,11 +26,6 @@ public class Enemy : MonoBehaviour {
 
     private float attackTimer = 0f;
 
-    private Tilemap map;
-
-    private List<Tile> openList;
-    private List<Tile> closedList;
-
     public enum EnemyType {
         Slime,
         Stalker,
@@ -66,7 +61,6 @@ public class Enemy : MonoBehaviour {
     private void Awake() {
         state = State.Roaming;
         currentHealth = maxHealth;
-        map = GameObject.FindWithTag("Map").GetComponent<Tilemap>();
     }
 
     private void Start() {

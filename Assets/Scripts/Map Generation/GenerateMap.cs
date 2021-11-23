@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Cinemachine;
+using Pathfinding;
 
 public class GenerateMap : MonoBehaviour {
     Tilemap tilemap;
@@ -45,8 +46,6 @@ public class GenerateMap : MonoBehaviour {
         for (int i = 0; i < baseTiles.Length; i++) {
             baseTiles[i].colliderType = Tile.ColliderType.Grid;
         }
-
-        //ApplyBase();
 
         floorTiles = InstantiateTiles(floorSprites);
 
@@ -93,6 +92,10 @@ public class GenerateMap : MonoBehaviour {
         vCam.GetComponent<CinemachineConfiner>().m_BoundingShape2D = pc;
 
         SpawnEnemies();
+
+        AstarPath.active.Scan();
+        //Bounds bounds = GetComponent<CompositeCollider2D>().bounds;
+        //AstarPath.active.UpdateGraphs(bounds);
     }
 
     private void GenerateRooms() {
@@ -349,6 +352,32 @@ public class GenerateMap : MonoBehaviour {
                 }
             }
         }
+
+        AstarPath.active.AddWorkItem(new AstarWorkItem(ctx => {
+            var gg = AstarPath.active.data.gridGraph;
+
+            for (int x = 0; x < sizeX; x++) {
+                for (int y = 0; y < sizeY; y++) {
+                    var node = gg.GetNode(x, y);
+
+                    bool isBaseTile = false;
+                    for (int i = 0; i < baseTiles.Length; i++) {
+                        if (tilemap.GetTile(new Vector3Int(x, y, 0)) == baseTiles[i]) {
+                            isBaseTile = true;
+                            break;
+                        }
+                    }
+
+                    if (isBaseTile) {
+                        node.Walkable = false;
+                    } else {
+                        node.Walkable = true;
+                    }
+                }
+            }
+
+            gg.GetNodes(node => gg.CalculateConnections((GridNodeBase)node));
+        }));
     }
 
     private Tile[] InstantiateTiles(Sprite[] sprites) { 
