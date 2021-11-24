@@ -9,8 +9,8 @@ public class EnemyAssets : MonoBehaviour {
         Instance = this;
     }
 
-    public Transform slimePrefab;
-    public Transform stalkerPrefab;
-    public Transform knightPrefab;
-    public Transform knightCaptainPrefab;
+    public Transform swordKnightPF;
+    public Transform mageKnightPF;
+    public Transform captainKnightPF;
+    public Transform archMagePF;
 }

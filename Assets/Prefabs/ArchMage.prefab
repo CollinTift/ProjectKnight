@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8814279007605737711}
   - component: {fileID: -6131515058953619474}
   m_Layer: 7
-  m_Name: Slime
+  m_Name: ArchMage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

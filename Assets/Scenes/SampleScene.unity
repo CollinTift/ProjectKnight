@@ -954,7 +954,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1734570257}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 80.22309, y: 106.29795, z: -36.88797}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -972,10 +972,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8891127683b0010499b963d955c2541c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slimePrefab: {fileID: 1433547295928376859, guid: c38b0e73354ff2c49819160a5c6d4f85, type: 3}
-  stalkerPrefab: {fileID: 440668733088580454, guid: 2e7cc1bcfe641c24cb16b9a3fd1b910e, type: 3}
-  knightPrefab: {fileID: 7981308169951406359, guid: 6304dd729feaf914799db94bec4d1402, type: 3}
-  knightCaptainPrefab: {fileID: 7859710871202839201, guid: 10a58f39ed725ed429b7878d82fd5770, type: 3}
+  swordKnightPF: {fileID: 7981308169951406359, guid: 6304dd729feaf914799db94bec4d1402, type: 3}
+  mageKnightPF: {fileID: 440668733088580454, guid: 2e7cc1bcfe641c24cb16b9a3fd1b910e, type: 3}
+  captainKnightPF: {fileID: 7859710871202839201, guid: 10a58f39ed725ed429b7878d82fd5770, type: 3}
+  archMagePF: {fileID: 1433547295928376859, guid: c38b0e73354ff2c49819160a5c6d4f85, type: 3}
 --- !u!1 &1757716950
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,6 +1030,10 @@ PrefabInstance:
     - target: {fileID: 3510889242458342444, guid: d38b85393f5245a48aa454da3ab7bf82, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510889242458342445, guid: d38b85393f5245a48aa454da3ab7bf82, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3510889242458342446, guid: d38b85393f5245a48aa454da3ab7bf82, type: 3}
       propertyPath: m_RootOrder

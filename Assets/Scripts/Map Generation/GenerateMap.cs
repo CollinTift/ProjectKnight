@@ -216,7 +216,7 @@ public class GenerateMap : MonoBehaviour {
     private void SpawnEnemies() {
         foreach (Room room in rooms) {
             if (room.roomType == Room.RoomType.monster) {
-                Enemy.SpawnEnemy(new Vector3(Random.Range(room.pos.x, room.pos.x + room.width) + .5f, Random.Range(room.pos.y, room.pos.y + room.height) + .5f, 0), Enemy.EnemyType.Slime);
+                Enemy.SpawnEnemy(new Vector3(Random.Range(room.pos.x, room.pos.x + room.width) + .5f, Random.Range(room.pos.y, room.pos.y + room.height) + .5f, 0), Enemy.EnemyType.SwordKnight);
             }
         }
     }

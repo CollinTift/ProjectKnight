@@ -1,15 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using Pathfinding;
 
 public class Enemy : MonoBehaviour {
     [Header("Health")]
     [SerializeField] private int maxHealth;
     private int currentHealth;
-
-    public float speed = 1f;
 
     public EnemyType type;
     private State state;
@@ -27,11 +24,16 @@ public class Enemy : MonoBehaviour {
 
     private float attackTimer = 0f;
 
+    private AIDestinationSetter aIDestinationSetter;
+    private AIPath aiPath;
+
+    private Animator animator;
+
     public enum EnemyType {
-        Slime,
-        Stalker,
-        Knight,
-        KnightCaptain
+        SwordKnight,
+        MageKnight,
+        CaptainKnight,
+        ArchMage
     }
 
     private enum State {
@@ -44,17 +46,17 @@ public class Enemy : MonoBehaviour {
     public static void SpawnEnemy(Vector3 worldPos, EnemyType type) {
         switch (type) {
             default:
-            case EnemyType.Slime:
-                Instantiate(EnemyAssets.Instance.slimePrefab, worldPos, Quaternion.identity);
+            case EnemyType.SwordKnight:
+                Instantiate(EnemyAssets.Instance.swordKnightPF, worldPos, Quaternion.identity);
                 break;
-            case EnemyType.Stalker:
-                Instantiate(EnemyAssets.Instance.stalkerPrefab, worldPos, Quaternion.identity);
+            case EnemyType.MageKnight:
+                Instantiate(EnemyAssets.Instance.mageKnightPF, worldPos, Quaternion.identity);
                 break;
-            case EnemyType.Knight:
-                Instantiate(EnemyAssets.Instance.knightPrefab, worldPos, Quaternion.identity);
+            case EnemyType.CaptainKnight:
+                Instantiate(EnemyAssets.Instance.captainKnightPF, worldPos, Quaternion.identity);
                 break;
-            case EnemyType.KnightCaptain:
-                Instantiate(EnemyAssets.Instance.knightCaptainPrefab, worldPos, Quaternion.identity);
+            case EnemyType.ArchMage:
+                Instantiate(EnemyAssets.Instance.archMagePF, worldPos, Quaternion.identity);
                 break;
         }
     }
@@ -64,8 +66,11 @@ public class Enemy : MonoBehaviour {
         currentHealth = maxHealth;
 
         //for now
-        AIDestinationSetter aIDestinationSetter = gameObject.GetComponent<AIDestinationSetter>();
+        aIDestinationSetter = gameObject.GetComponent<AIDestinationSetter>();
         aIDestinationSetter.target = PlayerController.Instance.gameObject.transform;
+
+        aiPath = gameObject.GetComponent<AIPath>();
+        animator = gameObject.GetComponent<Animator>();
     }
 
     private void Start() {
@@ -74,6 +79,7 @@ public class Enemy : MonoBehaviour {
     }
 
     private void Update() {
+
         if (attackTimer < attackCD) {
             attackTimer += Time.deltaTime;
         }
@@ -92,6 +98,12 @@ public class Enemy : MonoBehaviour {
                 //move to home position
                 break;
         }
+
+        animator.SetFloat("MoveX", aiPath.velocity.normalized.x);
+        animator.SetFloat("MoveY", aiPath.velocity.normalized.y);
+        animator.SetFloat("Speed", aiPath.velocity.magnitude);
+
+        Debug.Log(aiPath.velocity + gameObject.ToString());
     }
 
     public void Damage(int damage) {
@@ -108,6 +120,10 @@ public class Enemy : MonoBehaviour {
         //spawn items
 
         Destroy(gameObject);
+    }
+
+    private Vector3 GetRoamingPos() {
+        return new Vector3(Random.Range(detectionRange / 2, detectionRange), Random.Range(detectionRange / 2, detectionRange), 0);
     }
 
     //IMPLEMENT ***BASIC*** A* pathfinding
