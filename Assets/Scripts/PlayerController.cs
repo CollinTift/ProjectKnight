@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
     public int maxHealth = 10;
     private int currentHealth;
 
+    private Animator animator;
+
     void Awake() {
         Instance = this;
 
@@ -25,6 +27,8 @@ public class PlayerController : MonoBehaviour {
 
         currentHealth = maxHealth;
         lookDir = new Vector2(1, 0);
+
+        animator = GetComponent<Animator>();
     }
 
     void Update() {
@@ -44,6 +48,10 @@ public class PlayerController : MonoBehaviour {
             lookDir.Set(move.x, move.y);
             lookDir.Normalize();
         }
+
+        animator.SetFloat("MoveX", rb.velocity.normalized.x);
+        animator.SetFloat("MoveY", rb.velocity.normalized.y);
+        animator.SetFloat("Speed", rb.velocity.magnitude);
     }
 
     public void Damage(int damage) {

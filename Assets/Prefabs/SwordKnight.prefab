@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   type: 0
+  detectionRange: 3
   attackRange: 1
   attackCD: 1
   attackDamage: 1
@@ -118,7 +119,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 30
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -192,7 +193,7 @@ MonoBehaviour:
   rotationSpeed: 360
   slowdownDistance: 0.6
   pickNextWaypointDist: 0.8
-  endReachedDistance: 0.2
+  endReachedDistance: 0.5
   alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0

@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour {
 
     private Vector2 lookdir = new Vector2(1, 0);
 
-    private float detectionRange = 3f;
+    public float detectionRange = 3f;
 
     public float attackRange = 1f;
     public float attackCD = 3f;
@@ -87,6 +87,7 @@ public class Enemy : MonoBehaviour {
         switch (state) {
             default:
             case State.Roaming:
+                //if at roam pos, delay, then get new roam pos
                 break;
             case State.Chasing:
                 //if player is in detection range, go to them
