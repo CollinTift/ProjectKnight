@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MainVCam
   - Map
+  - Attack
   layers:
   - Default
   - TransparentFX
