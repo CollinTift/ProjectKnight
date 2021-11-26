@@ -9,6 +9,7 @@ public class GenerateMap : MonoBehaviour {
     Tilemap tilemap;
     GameObject vCam;
     TilemapCollider2D tc;
+    CompositeCollider2D cc;
     Rigidbody2D rb;
 
     [Header("Base Sprite")]
@@ -69,9 +70,11 @@ public class GenerateMap : MonoBehaviour {
 
         rb = gameObject.AddComponent<Rigidbody2D>();
         tc = gameObject.AddComponent<TilemapCollider2D>();
-        gameObject.AddComponent<CompositeCollider2D>();
+        cc = gameObject.AddComponent<CompositeCollider2D>();
 
         tc.usedByComposite = true;
+        cc.geometryType = CompositeCollider2D.GeometryType.Polygons;
+        
         rb.bodyType = RigidbodyType2D.Static;
 
         vCam = GameObject.FindWithTag("MainVCam");
