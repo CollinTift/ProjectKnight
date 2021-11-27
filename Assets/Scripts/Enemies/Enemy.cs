@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour {
     
     private Vector3 homePos;
 
+    private Vector3 lastKnownPlayerPos;
+    private bool playerLeftSight;
+
     private Vector2 lookDir = new Vector2(1, 0);
 
     public float detectionRange = 3f;
@@ -122,15 +125,25 @@ public class Enemy : MonoBehaviour {
 
                 break;
             case State.Chasing:
-                //if player is in detection range, go to them
-                if (Vector2.Distance(transform.position, PlayerController.Instance.GetPosition()) < detectionRange) {
-                    SetTarget(PlayerController.Instance.GetPosition());
-                    if (Vector2.Distance(transform.position, PlayerController.Instance.GetPosition()) < attackRange) {
+                playerLeftSight = Vector2.Distance(transform.position, PlayerController.Instance.GetPosition()) > detectionRange;
+                
+                if (!playerLeftSight) {
+                    lastKnownPlayerPos = PlayerController.Instance.GetPosition();
+                    SetTarget(lastKnownPlayerPos);
+                    if (Vector2.Distance(transform.position, lastKnownPlayerPos) < attackRange) {
                         state = State.Attacking;
                     }
                 } else {
-                    state = State.Returning;
+                    SetTarget(lastKnownPlayerPos);
+                    if (Vector2.Distance(transform.position, lastKnownPlayerPos) < .5f) {
+                        if (Vector2.Distance(transform.position, PlayerController.Instance.GetPosition()) < detectionRange) {
+                            SetTarget(PlayerController.Instance.GetPosition());
+                        } else {
+                            state = State.Roaming;
+                        }
+                    }
                 }
+
                 break;
             case State.Attacking:
                 //play attack anim; deal damage if hit player

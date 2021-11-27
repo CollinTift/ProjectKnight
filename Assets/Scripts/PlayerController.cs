@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 
     private Animator animator;
 
+    private GameManager gm;
     void Awake() {
         Instance = this;
 
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour {
         lookDir = new Vector2(1, 0);
 
         animator = GetComponent<Animator>();
+        gm = GameManager.Instance;
     }
 
     void Update() {
@@ -78,6 +80,8 @@ public class PlayerController : MonoBehaviour {
 
     private void Die() {
         animator.SetTrigger("Die");
+
+        gm.enableGameOver();
         Debug.Log("Game Over");
     }
 
