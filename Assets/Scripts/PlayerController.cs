@@ -32,7 +32,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-        Move();
+        if (currentHealth > 0) Move();
+        Debug.Log(currentHealth);
     }
 
     void FixedUpdate() {
@@ -54,8 +55,21 @@ public class PlayerController : MonoBehaviour {
         animator.SetFloat("Speed", rb.velocity.magnitude);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (currentHealth > 0) {
+            //enemy layer is 7
+            if (collision.collider.gameObject.tag == "Attack" && collision.collider.gameObject.layer == 7) {
+                Damage(collision.collider.gameObject.GetComponentInParent<Enemy>().attackDamage);
+            }
+        }
+    }
+
     public void Damage(int damage) {
-        currentHealth -= damage;
+        if (currentHealth > 0) {
+            currentHealth -= damage;
+
+            animator.SetTrigger("Damage");
+        }
 
         if (currentHealth <= 0) {
             Die();
@@ -63,6 +77,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Die() {
+        animator.SetTrigger("Die");
         Debug.Log("Game Over");
     }
 

@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour {
     
     private Vector3 homePos;
 
-    private Vector2 lookdir = new Vector2(1, 0);
+    private Vector2 lookDir = new Vector2(1, 0);
 
     public float detectionRange = 3f;
 
@@ -126,7 +126,6 @@ public class Enemy : MonoBehaviour {
                 if (Vector2.Distance(transform.position, PlayerController.Instance.GetPosition()) < detectionRange) {
                     SetTarget(PlayerController.Instance.GetPosition());
                     if (Vector2.Distance(transform.position, PlayerController.Instance.GetPosition()) < attackRange) {
-                        animator.SetTrigger("Attacking");
                         state = State.Attacking;
                     }
                 } else {
@@ -134,12 +133,18 @@ public class Enemy : MonoBehaviour {
                 }
                 break;
             case State.Attacking:
-                //play attack anim and raycast in lookDir to attackRange; deal damage if hit player
+                //play attack anim; deal damage if hit player
+                if (attackTimer >= attackCD) {
+                    animator.SetTrigger("Attacking");
+                    SetTarget(transform.position);
+                    attackTimer = 0f;
+                } else {
+                    animator.ResetTrigger("Attacking");
+                }
+
                 if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attacking")) {
                     state = State.Chasing;
                 }
-
-                Debug.Log("Attacking");
 
                 break;
             case State.Returning:
@@ -153,6 +158,15 @@ public class Enemy : MonoBehaviour {
                 break;
         }
 
+        if (Mathf.Abs(aiPath.velocity.magnitude) > 0 && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attacking")) {
+            lookDir.x = aiPath.velocity.x;
+            lookDir.y = aiPath.velocity.y;
+
+            animator.SetFloat("LookX", lookDir.x);
+            animator.SetFloat("LookY", lookDir.y);
+        }
+
+        
         animator.SetFloat("MoveX", aiPath.velocity.normalized.x);
         animator.SetFloat("MoveY", aiPath.velocity.normalized.y);
         animator.SetFloat("Speed", aiPath.velocity.magnitude);
