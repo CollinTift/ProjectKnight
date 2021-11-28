@@ -52,6 +52,14 @@ public class Enemy : MonoBehaviour {
         Returning
     }
 
+    private enum AbilityType {
+        Attack,
+        Block
+    }
+
+    private bool lastWasAttack = true;
+    private bool shielding = false;
+
     public static void SpawnEnemy(Vector3 worldPos, EnemyType type) {
         switch (type) {
             default:
@@ -143,11 +151,18 @@ public class Enemy : MonoBehaviour {
             case State.Attacking:
                 //play attack anim; deal damage if hit player
                 if (attackTimer >= attackCD) {
-                    animator.SetTrigger("Attacking");
-                    SetTarget(transform.position);
+                    if (type == EnemyType.SwordKnight && lastWasAttack) {
+                        animator.SetTrigger("Block");
+                        lastWasAttack = false;
+                    } else {
+                        animator.ResetTrigger("Block");
+                        animator.SetTrigger("Attack");
+                        lastWasAttack = true;
+                    }
+
                     attackTimer = 0f;
                 } else {
-                    animator.ResetTrigger("Attacking");
+                    animator.ResetTrigger("Attack");
                 }
 
                 if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attacking")) state = State.Chasing;
@@ -180,6 +195,14 @@ public class Enemy : MonoBehaviour {
         //Debug.Log(aiPath.velocity + gameObject.ToString());
     }
 
+    public void AllowMovement() {
+        aiPath.canMove = true;
+    }
+
+    public void DenyMovement() {
+        aiPath.canMove = false;
+    }
+
     private void SetTarget(Vector3 targetPos) {
         target.transform.position = targetPos;
     }
@@ -188,23 +211,39 @@ public class Enemy : MonoBehaviour {
         if (currentHealth > 0) {
             //PlayerAttack layer is 9
             if (collision.collider.gameObject.tag == "Attack" && collision.collider.gameObject.layer == 9 && iFrameTimer >= iFrameCD) {
-                Damage(PlayerController.Instance.attackDamage);
+                if (shielding) {
+                    //play shield bounce sound
+                } else {
+                    Damage(PlayerController.Instance.attackDamage);
+                }
+
                 iFrameTimer = 0f;
             }
+        }
+    }
+
+    public void SetShielding(int even) {
+        if (even % 2 == 0) {
+            shielding = true;
+        } else {
+            shielding = false;
         }
     }
 
     public void Damage(int damage) {
         currentHealth -= damage;
 
-        //apply damaged animation (change color as well)
+        animator.SetTrigger("Damage");
 
         if (currentHealth <= 0) Die();
     }
 
     private void Die() {
         //chance to spawn items
+        animator.SetTrigger("Die");
+    }
 
+    public void DestroyEnemy() {
         Destroy(target);
         Destroy(gameObject);
     }

@@ -136,12 +136,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -1351896109203709689, guid: 4185ca208787fd647b37572bd44cc6b7, type: 3}
+  m_Sprite: {fileID: 175949113334522214, guid: 211d4e6c3a3d7ce41825c38df83db535, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -159,12 +159,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c78ffa3ad0876e47bb3ff0247ca527a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 3
   type: 0
   detectionRange: 5
   attackRange: 1
   attackCD: 1.5
   attackDamage: 1
+  iFrameCD: 1
 --- !u!50 &7981308169951406356
 Rigidbody2D:
   serializedVersion: 4

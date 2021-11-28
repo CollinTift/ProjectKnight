@@ -1,67 +1,97 @@
 fileFormatVersion: 2
-guid: 4185ca208787fd647b37572bd44cc6b7
+guid: 25c6cd5b059734544933d549f0536095
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1351896109203709689
-    second: SwordKnight_0
+      213: 5276581801394909187
+    second: SwordKnightBlock_0
   - first:
-      213: 5662177396173360215
-    second: SwordKnight_1
+      213: -5600710077783105245
+    second: SwordKnightBlock_1
   - first:
-      213: 402404864054976253
-    second: SwordKnight_2
+      213: -4096413192318431459
+    second: SwordKnightBlock_2
   - first:
-      213: 5314632914206946174
-    second: SwordKnight_3
+      213: 237198730174899597
+    second: SwordKnightBlock_3
   - first:
-      213: -1106974037361532583
-    second: SwordKnight_4
+      213: -4204817486724007980
+    second: SwordKnightBlock_4
   - first:
-      213: -3618873324612468072
-    second: SwordKnight_5
+      213: -3705325546641911237
+    second: SwordKnightBlock_5
   - first:
-      213: 8402609382931097878
-    second: SwordKnight_6
+      213: 8820778681608244754
+    second: SwordKnightBlock_6
   - first:
-      213: 875335985849808262
-    second: SwordKnight_7
+      213: -6079767088572738879
+    second: SwordKnightBlock_7
   - first:
-      213: -6286698143335180605
-    second: SwordKnight_8
+      213: -7804486220719464041
+    second: SwordKnightBlock_8
   - first:
-      213: -1849692651804968390
-    second: SwordKnight_9
+      213: -4995564584028814371
+    second: SwordKnightBlock_9
   - first:
-      213: -2096082979518328578
-    second: SwordKnight_10
+      213: 8371353214842543616
+    second: SwordKnightBlock_10
   - first:
-      213: -2633519027214635097
-    second: SwordKnight_11
+      213: -8935132102905136150
+    second: SwordKnightBlock_11
   - first:
-      213: 5136950680050849396
-    second: SwordKnight_12
+      213: -7234450454478565039
+    second: SwordKnightBlock_12
   - first:
-      213: -23165383986834771
-    second: SwordKnight_13
+      213: 4364069628829903755
+    second: SwordKnightBlock_13
   - first:
-      213: -7228520846078469866
-    second: SwordKnight_14
+      213: 7540637927291841977
+    second: SwordKnightBlock_14
   - first:
-      213: -1622763874654834284
-    second: SwordKnight_15
+      213: 6071909342931719721
+    second: SwordKnightBlock_15
   - first:
-      213: 4086390831815228255
-    second: SwordKnight_16
+      213: -4004242607399150197
+    second: SwordKnightBlock_16
   - first:
-      213: -7194544901980239680
-    second: SwordKnight_17
+      213: 6697425497360602736
+    second: SwordKnightBlock_17
   - first:
-      213: -3862300889492577045
-    second: SwordKnight_18
+      213: 1715309317057487918
+    second: SwordKnightBlock_18
   - first:
-      213: -7353636166436395388
-    second: SwordKnight_19
+      213: 8108277404316696389
+    second: SwordKnightBlock_19
+  - first:
+      213: -4589279258764986071
+    second: SwordKnightBlock_20
+  - first:
+      213: -7115013835450668782
+    second: SwordKnightBlock_21
+  - first:
+      213: 3233977324380676947
+    second: SwordKnightBlock_22
+  - first:
+      213: -4085871923196177832
+    second: SwordKnightBlock_23
+  - first:
+      213: 4857491118358033738
+    second: SwordKnightBlock_24
+  - first:
+      213: -1907535252877286943
+    second: SwordKnightBlock_25
+  - first:
+      213: -6338897264922619198
+    second: SwordKnightBlock_26
+  - first:
+      213: -6349449595068831196
+    second: SwordKnightBlock_27
+  - first:
+      213: -5338866854968362401
+    second: SwordKnightBlock_28
+  - first:
+      213: -3112601667589795937
+    second: SwordKnightBlock_29
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -163,175 +193,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SwordKnight_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7012eadb6a91d3de0800000000000000
-      internalID: -1351896109203709689
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SwordKnight_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 75cc822a758149e40800000000000000
-      internalID: 5662177396173360215
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SwordKnight_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dfed2e18711a59500800000000000000
-      internalID: 402404864054976253
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SwordKnight_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e7377e23a7e51c940800000000000000
-      internalID: 5314632914206946174
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SwordKnight_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9516c7f5afc33a0f0800000000000000
-      internalID: -1106974037361532583
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SwordKnight_5
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 892465782ed27cdc0800000000000000
-      internalID: -3618873324612468072
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SwordKnight_6
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 619e8fff6b01c9470800000000000000
-      internalID: 8402609382931097878
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SwordKnight_7
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 685b1bff071d52c00800000000000000
-      internalID: 875335985849808262
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SwordKnight_8
+      name: SwordKnightBlock_0
       rect:
         serializedVersion: 2
         x: 0
@@ -345,14 +207,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c61664d85921c8a0800000000000000
-      internalID: -6286698143335180605
+      spriteID: 3003f6c113f2a3940800000000000000
+      internalID: 5276581801394909187
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwordKnight_9
+      name: SwordKnightBlock_1
       rect:
         serializedVersion: 2
         x: 16
@@ -366,14 +228,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3ab38155529456e0800000000000000
-      internalID: -1849692651804968390
+      spriteID: 321a9cbabd74642b0800000000000000
+      internalID: -5600710077783105245
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwordKnight_10
+      name: SwordKnightBlock_2
       rect:
         serializedVersion: 2
         x: 32
@@ -387,14 +249,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef0511ab2a739e2e0800000000000000
-      internalID: -2096082979518328578
+      spriteID: d1fc2a2c7ed9627c0800000000000000
+      internalID: -4096413192318431459
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwordKnight_11
+      name: SwordKnightBlock_3
       rect:
         serializedVersion: 2
         x: 48
@@ -408,14 +270,140 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7afa3a1d56cd37bd0800000000000000
-      internalID: -2633519027214635097
+      spriteID: d85af350df2ba4300800000000000000
+      internalID: 237198730174899597
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwordKnight_12
+      name: SwordKnightBlock_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d7f67e16cc75a5c0800000000000000
+      internalID: -4204817486724007980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b329a370c0a049cc0800000000000000
+      internalID: -3705325546641911237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21e0997f973b96a70800000000000000
+      internalID: 8820778681608244754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_7
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c2d2808b0450aba0800000000000000
+      internalID: -6079767088572738879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 791e597d125e0b390800000000000000
+      internalID: -7804486220719464041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_9
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd3c07c7a703caab0800000000000000
+      internalID: -4995564584028814371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_10
       rect:
         serializedVersion: 2
         x: 0
@@ -429,14 +417,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 476d1214d6d1a4740800000000000000
-      internalID: 5136950680050849396
+      spriteID: 00e930445650d2470800000000000000
+      internalID: 8371353214842543616
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwordKnight_13
+      name: SwordKnightBlock_11
       rect:
         serializedVersion: 2
         x: 16
@@ -450,14 +438,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da2116cb433bdaff0800000000000000
-      internalID: -23165383986834771
+      spriteID: aeb762951b8000480800000000000000
+      internalID: -8935132102905136150
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwordKnight_14
+      name: SwordKnightBlock_12
       rect:
         serializedVersion: 2
         x: 32
@@ -471,14 +459,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6199cfdb6922fab90800000000000000
-      internalID: -7228520846078469866
+      spriteID: 15154a334a11a9b90800000000000000
+      internalID: -7234450454478565039
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwordKnight_15
+      name: SwordKnightBlock_13
       rect:
         serializedVersion: 2
         x: 48
@@ -492,14 +480,140 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 491bcd09ad8ca79e0800000000000000
-      internalID: -1622763874654834284
+      spriteID: b8b2a71a43a409c30800000000000000
+      internalID: 4364069628829903755
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwordKnight_16
+      name: SwordKnightBlock_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bd611c2e3ab5a860800000000000000
+      internalID: 7540637927291841977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_15
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92612d58061c34450800000000000000
+      internalID: 6071909342931719721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_16
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8d5d7f50921e68c0800000000000000
+      internalID: -4004242607399150197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_17
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07692df510902fc50800000000000000
+      internalID: 6697425497360602736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_18
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e24212b5cb00ec710800000000000000
+      internalID: 1715309317057487918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_19
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54f7f98f653668070800000000000000
+      internalID: 8108277404316696389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_20
       rect:
         serializedVersion: 2
         x: 0
@@ -513,14 +627,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5b72c79fc6c5b830800000000000000
-      internalID: 4086390831815228255
+      spriteID: 929be3644da9f40c0800000000000000
+      internalID: -4589279258764986071
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwordKnight_17
+      name: SwordKnightBlock_21
       rect:
         serializedVersion: 2
         x: 16
@@ -534,14 +648,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c8cedca787d72c90800000000000000
-      internalID: -7194544901980239680
+      spriteID: 21929f51d94624d90800000000000000
+      internalID: -7115013835450668782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwordKnight_18
+      name: SwordKnightBlock_22
       rect:
         serializedVersion: 2
         x: 32
@@ -555,14 +669,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be4ae1aedc9566ac0800000000000000
-      internalID: -3862300889492577045
+      spriteID: 353e06ffd3561ec20800000000000000
+      internalID: 3233977324380676947
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwordKnight_19
+      name: SwordKnightBlock_23
       rect:
         serializedVersion: 2
         x: 48
@@ -576,8 +690,134 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 486e71c2ed2a2f990800000000000000
-      internalID: -7353636166436395388
+      spriteID: 852562c32211c47c0800000000000000
+      internalID: -4085871923196177832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_24
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a457851af66496340800000000000000
+      internalID: 4857491118358033738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_25
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e1e6b74bc21785e0800000000000000
+      internalID: -1907535252877286943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_26
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c29790c586b708a0800000000000000
+      internalID: -6338897264922619198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_27
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42aacaeeb3932e7a0800000000000000
+      internalID: -6349449595068831196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_28
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5af086c1e888e5b0800000000000000
+      internalID: -5338866854968362401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordKnightBlock_29
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9f850c4641ddc4d0800000000000000
+      internalID: -3112601667589795937
       vertices: []
       indices: 
       edges: []
