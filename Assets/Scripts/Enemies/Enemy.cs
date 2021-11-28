@@ -90,22 +90,15 @@ public class Enemy : MonoBehaviour {
 
     private void Update() {
 
-        if (attackTimer < attackCD) {
-            attackTimer += Time.deltaTime;
-        }
+        if (attackTimer < attackCD) attackTimer += Time.deltaTime;
 
         switch (state) {
             default:
             case State.Roaming:
                 //if at roam pos, delay, then get new roam pos
+                if (Vector2.Distance(transform.position, target.transform.position) < .5f) state = State.Surveying;
 
-                if (Vector2.Distance(transform.position, target.transform.position) < .5f) {
-                    state = State.Surveying;
-                }
-
-                if (Vector2.Distance(transform.position, PlayerController.Instance.GetPosition()) < detectionRange) {
-                    state = State.Chasing;
-                }
+                if (Vector2.Distance(transform.position, PlayerController.Instance.GetPosition()) < detectionRange) state = State.Chasing;
 
                 break;
             case State.Surveying:
@@ -130,11 +123,11 @@ public class Enemy : MonoBehaviour {
                 if (!playerLeftSight) {
                     lastKnownPlayerPos = PlayerController.Instance.GetPosition();
                     SetTarget(lastKnownPlayerPos);
-                    if (Vector2.Distance(transform.position, lastKnownPlayerPos) < attackRange) {
-                        state = State.Attacking;
-                    }
+
+                    if (Vector2.Distance(transform.position, lastKnownPlayerPos) < attackRange) state = State.Attacking;
                 } else {
                     SetTarget(lastKnownPlayerPos);
+
                     if (Vector2.Distance(transform.position, lastKnownPlayerPos) < .5f) {
                         if (Vector2.Distance(transform.position, PlayerController.Instance.GetPosition()) < detectionRange) {
                             SetTarget(PlayerController.Instance.GetPosition());
@@ -155,9 +148,7 @@ public class Enemy : MonoBehaviour {
                     animator.ResetTrigger("Attacking");
                 }
 
-                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attacking")) {
-                    state = State.Chasing;
-                }
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attacking")) state = State.Chasing;
 
                 break;
             case State.Returning:
@@ -191,19 +182,25 @@ public class Enemy : MonoBehaviour {
         target.transform.position = targetPos;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (currentHealth > 0) {
+            //player layer is 3
+            if (collision.collider.gameObject.tag == "Attack" && collision.collider.gameObject.layer == 3) Damage(PlayerController.Instance.attackDamage);
+        }
+    }
+
     public void Damage(int damage) {
         currentHealth -= damage;
 
         //apply damaged animation (change color as well)
 
-        if (currentHealth <= 0) {
-            Die();
-        }
+        if (currentHealth <= 0) Die();
     }
 
     private void Die() {
-        //spawn items
+        //chance to spawn items
 
+        Destroy(target);
         Destroy(gameObject);
     }
 
