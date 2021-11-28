@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
-using UnityEngine.Tilemaps;
 
 public class Enemy : MonoBehaviour {
     [Header("Health")]
@@ -24,6 +23,9 @@ public class Enemy : MonoBehaviour {
     public float attackRange = 1f;
     public float attackCD = 3f;
     public int attackDamage = 1;
+
+    public float iFrameCD = 1f;
+    private float iFrameTimer = 0f;
 
     private float surveyTimer = 0f;
     private float attackTimer = 0f;
@@ -89,8 +91,8 @@ public class Enemy : MonoBehaviour {
     }
 
     private void Update() {
-
         if (attackTimer < attackCD) attackTimer += Time.deltaTime;
+        if (iFrameTimer < iFrameCD) iFrameTimer += Time.deltaTime;
 
         switch (state) {
             default:
@@ -185,7 +187,10 @@ public class Enemy : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision) {
         if (currentHealth > 0) {
             //PlayerAttack layer is 9
-            if (collision.collider.gameObject.tag == "Attack" && collision.collider.gameObject.layer == 9) Damage(PlayerController.Instance.attackDamage);
+            if (collision.collider.gameObject.tag == "Attack" && collision.collider.gameObject.layer == 9 && iFrameTimer >= iFrameCD) {
+                Damage(PlayerController.Instance.attackDamage);
+                iFrameTimer = 0f;
+            }
         }
     }
 
