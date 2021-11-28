@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour {
             if (attackTimer < attackCD) {
                 attackTimer += Time.deltaTime;
             } else {
-                if (Input.GetKeyDown(KeyCode.Mouse0)) Attack();
+                if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space)) Attack();
             }
         }
     }

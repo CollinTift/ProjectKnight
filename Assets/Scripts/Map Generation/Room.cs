@@ -10,9 +10,9 @@ public class Room {
 
     public enum RoomType {
         empty,
-        monster,
+        armory,
+        library,
         loot,
-        trap,
         entrance,
         exit,
         COUNT

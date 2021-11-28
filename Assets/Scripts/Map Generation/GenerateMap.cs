@@ -94,11 +94,16 @@ public class GenerateMap : MonoBehaviour {
 
         vCam.GetComponent<CinemachineConfiner>().m_BoundingShape2D = pc;
 
-        SpawnEnemies();
+        SpawnEnemies(GameManager.Instance.enemiesThisWave);
 
         AstarPath.active.Scan();
-        //Bounds bounds = GetComponent<CompositeCollider2D>().bounds;
-        //AstarPath.active.UpdateGraphs(bounds);
+    }
+
+    private void Update() {
+        if (GameManager.Instance.enemiesThisWave > 0) {
+            SpawnEnemies(GameManager.Instance.enemiesThisWave);
+            GameManager.Instance.enemiesThisWave = 0;
+        }
     }
 
     private void GenerateRooms() {
@@ -216,10 +221,22 @@ public class GenerateMap : MonoBehaviour {
         }
     }
 
-    private void SpawnEnemies() {
-        foreach (Room room in rooms) {
-            if (room.roomType == Room.RoomType.monster) {
-                Enemy.SpawnEnemy(new Vector3(Random.Range(room.pos.x, room.pos.x + room.width) + .5f, Random.Range(room.pos.y, room.pos.y + room.height) + .5f, 0), Enemy.EnemyType.SwordKnight);
+    private void SpawnEnemies(int numEnemies) {
+        GameObject waveHolder = new GameObject("Wave: " + GameManager.Instance.currentWave + ", Num: " + GameManager.Instance.enemiesThisWave);
+
+        int numSpawned = 0;
+
+        while (numSpawned < numEnemies) {
+            foreach (Room room in rooms) {
+                if (room.roomType == Room.RoomType.armory) {
+                    Enemy.SpawnEnemy(new Vector3(Random.Range(room.pos.x, room.pos.x + room.width) + .5f, Random.Range(room.pos.y, room.pos.y + room.height) + .5f, 0), Enemy.EnemyType.SwordKnight, waveHolder.transform);
+                    numSpawned++;
+                } else if (room.roomType == Room.RoomType.library) {
+                    Enemy.SpawnEnemy(new Vector3(Random.Range(room.pos.x, room.pos.x + room.width) + .5f, Random.Range(room.pos.y, room.pos.y + room.height) + .5f, 0), Enemy.EnemyType.MageKnight, waveHolder.transform);
+                    numSpawned++;
+                }
+
+                if (numSpawned >= numEnemies) break;
             }
         }
     }

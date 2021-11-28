@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour {
     public float attackCD = 3f;
     public int attackDamage = 1;
 
+    public GameObject projectile;
+
     public float iFrameCD = 1f;
     private float iFrameTimer = 0f;
 
@@ -60,20 +62,20 @@ public class Enemy : MonoBehaviour {
     private bool lastWasAttack = true;
     private bool shielding = false;
 
-    public static void SpawnEnemy(Vector3 worldPos, EnemyType type) {
+    public static void SpawnEnemy(Vector3 worldPos, EnemyType type, Transform parent) {
         switch (type) {
             default:
             case EnemyType.SwordKnight:
-                Instantiate(EnemyAssets.Instance.swordKnightPF, worldPos, Quaternion.identity);
+                Instantiate(EnemyAssets.Instance.swordKnightPF, worldPos, Quaternion.identity, parent);
                 break;
             case EnemyType.MageKnight:
-                Instantiate(EnemyAssets.Instance.mageKnightPF, worldPos, Quaternion.identity);
+                Instantiate(EnemyAssets.Instance.mageKnightPF, worldPos, Quaternion.identity, parent);
                 break;
             case EnemyType.CaptainKnight:
-                Instantiate(EnemyAssets.Instance.captainKnightPF, worldPos, Quaternion.identity);
+                Instantiate(EnemyAssets.Instance.captainKnightPF, worldPos, Quaternion.identity, parent);
                 break;
             case EnemyType.ArchMage:
-                Instantiate(EnemyAssets.Instance.archMagePF, worldPos, Quaternion.identity);
+                Instantiate(EnemyAssets.Instance.archMagePF, worldPos, Quaternion.identity, parent);
                 break;
         }
     }
@@ -88,7 +90,7 @@ public class Enemy : MonoBehaviour {
 
         aiPath = gameObject.GetComponent<AIPath>();
         animator = gameObject.GetComponent<Animator>();
-        target = new GameObject();
+        target = new GameObject("target");
     }
 
     private void Start() {
@@ -151,13 +153,23 @@ public class Enemy : MonoBehaviour {
             case State.Attacking:
                 //play attack anim; deal damage if hit player
                 if (attackTimer >= attackCD) {
-                    if (type == EnemyType.SwordKnight && lastWasAttack) {
-                        animator.SetTrigger("Block");
-                        lastWasAttack = false;
-                    } else {
-                        animator.ResetTrigger("Block");
+                    if (type == EnemyType.SwordKnight) {
+                        if (lastWasAttack) {
+                            animator.SetTrigger("Block");
+                            lastWasAttack = false;
+                        } else {
+                            animator.ResetTrigger("Block");
+                            animator.SetTrigger("Attack");
+                            lastWasAttack = true;
+                        }
+                    } else if (type == EnemyType.MageKnight) {
                         animator.SetTrigger("Attack");
-                        lastWasAttack = true;
+                        //spawn projectile
+                        if (projectile != null) {
+                            GameObject go = Instantiate(projectile, GetComponent<Rigidbody2D>().position + Vector2.up * .5f, Quaternion.identity);
+                            Projectile proj = go.GetComponent<Projectile>();
+                            proj.Launch(lookDir, 10, attackDamage);
+                        }
                     }
 
                     attackTimer = 0f;
