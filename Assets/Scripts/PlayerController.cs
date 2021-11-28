@@ -92,8 +92,8 @@ public class PlayerController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (currentHealth > 0) {
-            //enemy layer is 7
-            if (collision.collider.gameObject.tag == "Attack" && collision.collider.gameObject.layer == 7 && iFrameTimer >= iFrameCD) {
+            //EnemyAttack layer is 10
+            if (collision.collider.gameObject.tag == "Attack" && collision.collider.gameObject.layer == 10 && iFrameTimer >= iFrameCD) {
                 Damage(collision.collider.gameObject.GetComponentInParent<Enemy>().attackDamage);
                 iFrameTimer = 0f;
             }

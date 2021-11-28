@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6785994743364523590}
   - component: {fileID: 2109152997165435106}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: PlayerAttack
   m_TagString: Attack
   m_Icon: {fileID: 0}
@@ -179,6 +179,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   maxHealth: 10
+  attackCD: 1
+  attackDamage: 1
+  iFrameCD: 1
 --- !u!61 &3510889242458342447
 BoxCollider2D:
   m_ObjectHideFlags: 0

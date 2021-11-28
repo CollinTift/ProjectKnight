@@ -184,8 +184,8 @@ public class Enemy : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (currentHealth > 0) {
-            //player layer is 3
-            if (collision.collider.gameObject.tag == "Attack" && collision.collider.gameObject.layer == 3) Damage(PlayerController.Instance.attackDamage);
+            //PlayerAttack layer is 9
+            if (collision.collider.gameObject.tag == "Attack" && collision.collider.gameObject.layer == 9) Damage(PlayerController.Instance.attackDamage);
         }
     }
 

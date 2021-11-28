@@ -18,8 +18,8 @@ TagManager:
   - CameraConfiner
   - Enemy
   - Map
-  - 
-  - 
+  - PlayerAttack
+  - EnemyAttack
   - 
   - 
   - 
