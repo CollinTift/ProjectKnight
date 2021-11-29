@@ -39,6 +39,8 @@ public class Enemy : MonoBehaviour {
     private GameObject target;
     private GridGraph gg;
 
+    private bool canSpawnProj = true; //must be done bc called in animator, is scuffed
+
     public enum EnemyType {
         SwordKnight,
         MageKnight,
@@ -167,6 +169,7 @@ public class Enemy : MonoBehaviour {
                     }
 
                     attackTimer = 0f;
+                    canSpawnProj = true;
                 } else {
                     animator.ResetTrigger("Attack");
                 }
@@ -209,10 +212,12 @@ public class Enemy : MonoBehaviour {
     }
 
     public void SpawnMageProj() {
-        if (projectile != null) {
+        if (projectile != null && canSpawnProj) {
             GameObject go = Instantiate(projectile, transform.position, Quaternion.identity);
             Projectile proj = go.GetComponent<Projectile>();
             proj.Launch(PlayerController.Instance.GetPosition() - transform.position, attackDamage, 0.5f);
+
+            canSpawnProj = false;
         }
     }
 
