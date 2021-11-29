@@ -164,12 +164,6 @@ public class Enemy : MonoBehaviour {
                         }
                     } else if (type == EnemyType.MageKnight) {
                         animator.SetTrigger("Attack");
-                        //spawn projectile
-                        if (projectile != null) {
-                            GameObject go = Instantiate(projectile, GetComponent<Rigidbody2D>().position + Vector2.up * .5f, Quaternion.identity);
-                            Projectile proj = go.GetComponent<Projectile>();
-                            proj.Launch(lookDir, 10, attackDamage);
-                        }
                     }
 
                     attackTimer = 0f;
@@ -198,7 +192,6 @@ public class Enemy : MonoBehaviour {
             animator.SetFloat("LookX", lookDir.x);
             animator.SetFloat("LookY", lookDir.y);
         }
-
         
         animator.SetFloat("MoveX", aiPath.velocity.normalized.x);
         animator.SetFloat("MoveY", aiPath.velocity.normalized.y);
@@ -213,6 +206,14 @@ public class Enemy : MonoBehaviour {
 
     public void DenyMovement() {
         aiPath.canMove = false;
+    }
+
+    public void SpawnMageProj() {
+        if (projectile != null) {
+            GameObject go = Instantiate(projectile, transform.position, Quaternion.identity);
+            Projectile proj = go.GetComponent<Projectile>();
+            proj.Launch((PlayerController.Instance.GetPosition() - transform.position).normalized, attackDamage, 1f);
+        }
     }
 
     private void SetTarget(Vector3 targetPos) {
@@ -253,6 +254,7 @@ public class Enemy : MonoBehaviour {
     private void Die() {
         //chance to spawn items
         animator.SetTrigger("Die");
+        GetComponent<Rigidbody2D>().isKinematic = false;
     }
 
     public void DestroyEnemy() {

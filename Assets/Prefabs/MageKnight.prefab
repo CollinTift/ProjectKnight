@@ -53,8 +53,8 @@ MonoBehaviour:
   maxHealth: 3
   type: 1
   detectionRange: 6
-  attackRange: 3
-  attackCD: 1
+  attackRange: 5
+  attackCD: 3
   attackDamage: 2
   projectile: {fileID: 4542471216748043193, guid: 488840c6c99911345a35fe6c1b51496d, type: 3}
   iFrameCD: 1

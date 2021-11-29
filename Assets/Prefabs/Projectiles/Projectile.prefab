@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 4542471216748043192}
   - component: {fileID: 4542471216748043199}
   - component: {fileID: -2899463086797687318}
-  - component: {fileID: -8679278676907287487}
   - component: {fileID: -4490361277075899075}
+  - component: {fileID: 2753570310794599386}
+  - component: {fileID: 7166570938529340721}
   m_Layer: 10
   m_Name: Projectile
-  m_TagString: Attack
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +102,19 @@ CircleCollider2D:
   m_Offset: {x: -0.03291762, y: -0.047318906}
   serializedVersion: 2
   m_Radius: 0.2222578
---- !u!50 &-8679278676907287487
+--- !u!114 &-4490361277075899075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4542471216748043193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f2421d291507a4f96412811c97d74b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &2753570310794599386
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -122,15 +135,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-4490361277075899075
-MonoBehaviour:
+--- !u!95 &7166570938529340721
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4542471216748043193}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8f2421d291507a4f96412811c97d74b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 61b997a5f4aeebc4498a621cee8ad0ad, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -440,6 +440,10 @@ public class GenerateMap : MonoBehaviour {
         return floorTiles[0];
     }
 
+    public void GenerateNewRoom() {
+        //should clear tilemap, generate new room, scan for A* graph, do everything required
+    }
+
     //loop through each pixel per tile and create new texture2D to return and apply to a tile for procedural generation!!!!
     //https://docs.unity3d.com/ScriptReference/Tilemaps.TileBase.html
     //https://docs.unity3d.com/ScriptReference/Tilemaps.Tilemap.html
