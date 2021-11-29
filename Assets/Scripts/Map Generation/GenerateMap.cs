@@ -224,19 +224,37 @@ public class GenerateMap : MonoBehaviour {
     private void SpawnEnemies(int numEnemies) {
         GameObject waveHolder = new GameObject("Wave: " + GameManager.Instance.currentWave + ", Num: " + GameManager.Instance.enemiesThisWave);
 
-        int numSpawned = 0;
+        List<Room> spawnableRooms = new List<Room>();
+        spawnableRooms.Clear();
 
-        while (numSpawned < numEnemies) {
-            foreach (Room room in rooms) {
-                if (room.roomType == Room.RoomType.armory) {
-                    Enemy.SpawnEnemy(new Vector3(Random.Range(room.pos.x, room.pos.x + room.width) + .5f, Random.Range(room.pos.y, room.pos.y + room.height) + .5f, 0), Enemy.EnemyType.SwordKnight, waveHolder.transform);
-                    numSpawned++;
-                } else if (room.roomType == Room.RoomType.library) {
-                    Enemy.SpawnEnemy(new Vector3(Random.Range(room.pos.x, room.pos.x + room.width) + .5f, Random.Range(room.pos.y, room.pos.y + room.height) + .5f, 0), Enemy.EnemyType.MageKnight, waveHolder.transform);
-                    numSpawned++;
-                }
+        foreach (Room room in rooms) {
+            switch (room.roomType) {
+                case Room.RoomType.armory:
+                case Room.RoomType.library:
+                    spawnableRooms.Add(room);
+                    break;
+                default:
+                    break;
+            }
+        }
 
-                if (numSpawned >= numEnemies) break;
+        for (int i = 0; i < numEnemies; i++) {
+            Room randRoom = spawnableRooms[Random.Range(0, spawnableRooms.Count)];
+            switch (randRoom.roomType) {
+                case Room.RoomType.armory:
+                    Enemy.SpawnEnemy(
+                        new Vector3(Random.Range(randRoom.pos.x, randRoom.pos.x + randRoom.width) + .5f, Random.Range(randRoom.pos.y, randRoom.pos.y + randRoom.height) + .5f, 0),
+                        Enemy.EnemyType.SwordKnight,
+                        waveHolder.transform);
+                    break;
+                case Room.RoomType.library:
+                    Enemy.SpawnEnemy(
+                        new Vector3(Random.Range(randRoom.pos.x, randRoom.pos.x + randRoom.width) + .5f, Random.Range(randRoom.pos.y, randRoom.pos.y + randRoom.height) + .5f, 0),
+                        Enemy.EnemyType.MageKnight,
+                        waveHolder.transform);
+                    break;
+                default:
+                    break;
             }
         }
     }

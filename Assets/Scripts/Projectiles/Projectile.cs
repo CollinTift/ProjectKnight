@@ -16,8 +16,10 @@ public class Projectile : MonoBehaviour {
         this.damage = damage;
         this.speed = speed;
 
-        transform.forward = Vector2.up;
-        transform.rotation = Quaternion.FromToRotation(transform.position, shootDir);
+        float zRot = Mathf.Atan2(shootDir.normalized.y, shootDir.normalized.x) * Mathf.Rad2Deg;
+        zRot -= 90;
+        if (zRot < 0) zRot += 360;
+        transform.eulerAngles = new Vector3(0, 0, zRot);
 
         Destroy(gameObject, 10f);
     }

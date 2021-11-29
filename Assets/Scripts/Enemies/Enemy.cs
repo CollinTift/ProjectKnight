@@ -212,7 +212,7 @@ public class Enemy : MonoBehaviour {
         if (projectile != null) {
             GameObject go = Instantiate(projectile, transform.position, Quaternion.identity);
             Projectile proj = go.GetComponent<Projectile>();
-            proj.Launch((PlayerController.Instance.GetPosition() - transform.position).normalized, attackDamage, 1f);
+            proj.Launch(PlayerController.Instance.GetPosition() - transform.position, attackDamage, 0.5f);
         }
     }
 
