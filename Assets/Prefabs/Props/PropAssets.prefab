@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c4f5739c7d2984ca45a2567247f486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  propPF: {fileID: 8424139665929721428, guid: 2b7bf5954f7cb4447bb3a24497fa54cf, type: 3}
   bookSprites:
   - {fileID: 2353571312451627304, guid: 3286ae226bf5df14e86107604f7090d6, type: 3}
   - {fileID: -2608732192183298087, guid: 3286ae226bf5df14e86107604f7090d6, type: 3}

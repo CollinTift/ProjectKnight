@@ -16,12 +16,16 @@ public class Prop : MonoBehaviour {
     }
 
     public PropType propType;
-    public RectTransform fillBox;
 
+    public RectTransform fillBox;
     private Vector3 fillBoxMax;
 
     private SpriteRenderer sp;
     private Rigidbody2D rb;
+
+    public static void SpawnProp(Vector3 worldPos, PropType type, Transform parent) {
+        Instantiate(PropAssets.Instance.propPF, worldPos, Quaternion.identity, parent);
+    }
 
     void Start() {
         currentHealth = maxHealth;

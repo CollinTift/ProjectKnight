@@ -253,8 +253,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   parallaxEffect: 0.45
-  sizeX: 200
-  sizeY: 200
+  sizeX: 150
+  sizeY: 150
   bgSprites:
   - {fileID: -5858099061022299432, guid: 993be9108c11b3343a6976f63e78180f, type: 3}
   - {fileID: -5100910793555767408, guid: 993be9108c11b3343a6976f63e78180f, type: 3}
@@ -419,11 +419,11 @@ MonoBehaviour:
   - {fileID: -2220452024224219132, guid: 9ea6ae9ccc45acc438db6f76a577bbd6, type: 3}
   - {fileID: 6224844968285270226, guid: 9ea6ae9ccc45acc438db6f76a577bbd6, type: 3}
   - {fileID: 2659318863468640080, guid: 9ea6ae9ccc45acc438db6f76a577bbd6, type: 3}
-  sizeX: 150
-  sizeY: 150
-  numRooms: 15
-  minRoomDimension: 10
-  maxRoomDimension: 25
+  sizeX: 75
+  sizeY: 75
+  numRooms: 10
+  minRoomDimension: 5
+  maxRoomDimension: 15
   floorSprites:
   - {fileID: -8213782765776912250, guid: 6df1fd9f08611944aa5bf6779c3ca2e7, type: 3}
   - {fileID: -8518063296010493290, guid: 6df1fd9f08611944aa5bf6779c3ca2e7, type: 3}

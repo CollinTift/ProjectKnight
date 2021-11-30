@@ -16,6 +16,9 @@ public class PropAssets : MonoBehaviour
         }
     }
 
+    [Header("Prop prefab")]
+    public Transform propPF;
+
     public Sprite[] bookSprites;
     public Sprite[] chairSprites;
     public Sprite[] tableSprites;

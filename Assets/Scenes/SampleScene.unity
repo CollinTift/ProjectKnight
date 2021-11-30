@@ -517,34 +517,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 519420028}
-    - target: {fileID: 561351016371876718, guid: 626b8f7ee220e784e981f87aca875aa6, type: 3}
-      propertyPath: sizeX
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 561351016371876718, guid: 626b8f7ee220e784e981f87aca875aa6, type: 3}
-      propertyPath: sizeY
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 561351016521734946, guid: 626b8f7ee220e784e981f87aca875aa6, type: 3}
-      propertyPath: sizeX
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 561351016521734946, guid: 626b8f7ee220e784e981f87aca875aa6, type: 3}
-      propertyPath: sizeY
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 561351016521734946, guid: 626b8f7ee220e784e981f87aca875aa6, type: 3}
-      propertyPath: numRooms
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 561351016521734946, guid: 626b8f7ee220e784e981f87aca875aa6, type: 3}
-      propertyPath: maxRoomDimension
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 561351016521734946, guid: 626b8f7ee220e784e981f87aca875aa6, type: 3}
-      propertyPath: minRoomDimension
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 626b8f7ee220e784e981f87aca875aa6, type: 3}
 --- !u!1001 &2808613774972259670
@@ -606,10 +578,6 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 348899050}
-    - target: {fileID: 2808613776622738275, guid: 2fe695ec744128047972ead2df89af64, type: 3}
-      propertyPath: m_Lens.OrthographicSize
-      value: 6
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fe695ec744128047972ead2df89af64, type: 3}
 --- !u!1001 &3111336280707016574
@@ -777,18 +745,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4104998804342683859, guid: e954e9efc076ee747a428be5ce7ffcb5, type: 3}
-      propertyPath: showGraphs
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4104998804342683859, guid: e954e9efc076ee747a428be5ce7ffcb5, type: 3}
-      propertyPath: logPathResults
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4104998804342683859, guid: e954e9efc076ee747a428be5ce7ffcb5, type: 3}
-      propertyPath: data.dataString
-      value: UEsDBBQAAAgIAACYn+uUdPhJYAIAABkFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1z4jAM/SuMz9tOylfK3nYppXugZcru9JKLsRXiwbEz/ijQDv99LSchKTt7QkhP0nuSnE8ilK2AOW2WRvCV5kC+Dwja5NugCz7Bke602ogPaDFvgrsCQTRiXqkTOvjvMM3qEpwR7IfaSQQnwemVyLUpF3wHc22dDe6cSgshZLTDbBVcnwNyDD83M0w5BWuYovURrFkyOAeTgXJgOugovZ002MZEcI31iklaVsCReJeStgnpJMJUkNQgkD7TUgrb8CHuVEW9m6oAAyiYCxrkRQ4IL0DsCodU+7kveW7BNdoNPT0IE6ZUFyU/dT26ktp9TeudSo9thpNppFQXXf0Tv7mL4dzo8qnte5dgD1cItn+lJ0at68227374StyrA5V7upXwVoB61kujveIh6IzHVG9h+ND9vUibF8D2nb+meuX0VTfudpXtIlHDOao/zqUotxi6HdeOjdRx3HH/YMJifgXC8TpsUyJ4kcUfC7/prn9GTeBRGOtCqFGpkN5We4NQsogzQzXezbVRYPoVKlBUutM61HHXO7yK/T/rkeKLabo3sfYhXKVEd4dPkqvQWh8u27KFPqzAFi/eSaGgGzUGnsOg5lqp+sT6ktq0jTc5Zb20nRf8622R6T1MR2y05eNxwnKW3tynk/tRmiczAJpMZmMSj0+ooJPKdU20GU9Ym+qKq3Bo7YdksDS0iufODT0sxUep+wSFyvWGGQD1Upe4MAcTuoRnyRdchAltwDmh4sbJZ0akZnvg2aVnFqUujs7QrKuSkUq8a4eejMzjpyMj6L5c89rAu4ADNm+Lncn5L1BLAwQUAAAICAAAmJ/rPYkwFG0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0kplFqplxsnFSiomJQXJasrmuhbmphbF5moFlamqigamliVIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAmJ/rlHT4SWACAAAZBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAmJ/rPYkwFG0AAAB4AAAACQAkAAAAAAAAAAAAAACtAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAGUDAAAAAA==
-      objectReference: {fileID: 0}
     - target: {fileID: 4104998804342683869, guid: e954e9efc076ee747a428be5ce7ffcb5, type: 3}
       propertyPath: m_Name
       value: A*
@@ -849,10 +805,6 @@ PrefabInstance:
     - target: {fileID: 4899837369928289676, guid: 65f428bc162330d4495e1dd486800ed4, type: 3}
       propertyPath: m_Name
       value: Main Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899837369928289679, guid: 65f428bc162330d4495e1dd486800ed4, type: 3}
-      propertyPath: orthographic size
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65f428bc162330d4495e1dd486800ed4, type: 3}

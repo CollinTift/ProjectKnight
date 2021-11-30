@@ -41,6 +41,9 @@ public class Enemy : MonoBehaviour {
 
     private bool canSpawnProj = true; //must be done bc called in animator, is scuffed
 
+    public RectTransform fillBox;
+    private Vector3 fillBoxMax;
+
     public enum EnemyType {
         SwordKnight,
         MageKnight,
@@ -100,6 +103,7 @@ public class Enemy : MonoBehaviour {
 
         SetTarget(GetRoamingPos());
         aIDestinationSetter.target = target.transform;
+        fillBoxMax = fillBox.localScale;
     }
 
     private void Update() {
@@ -232,6 +236,7 @@ public class Enemy : MonoBehaviour {
                 if (shielding) {
                     //play shield bounce sound
                 } else {
+                    //play damage sound
                     Damage(PlayerController.Instance.attackDamage);
                 }
 
@@ -254,6 +259,8 @@ public class Enemy : MonoBehaviour {
         animator.SetTrigger("Damage");
 
         if (currentHealth <= 0) Die();
+        
+        fillBox.localScale = new Vector3(fillBoxMax.x * Mathf.Clamp((float)currentHealth / (float)maxHealth, 0f, 1f), fillBoxMax.y, fillBoxMax.z);
     }
 
     private void Die() {
