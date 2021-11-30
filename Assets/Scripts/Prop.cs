@@ -16,6 +16,10 @@ public class Prop : MonoBehaviour {
     }
 
     public PropType propType;
+    public RectTransform fillBox;
+
+    private Vector3 fillBoxMax;
+
     private SpriteRenderer sp;
     private Rigidbody2D rb;
 
@@ -29,20 +33,24 @@ public class Prop : MonoBehaviour {
             case PropType.Book:
                 maxHealth = 1;
                 sp.sprite = PropAssets.GetRandomSprite(PropAssets.Instance.bookSprites);
+                rb.drag = 5f;
                 break;
             case PropType.Chair:
                 maxHealth = 3;
                 sp.sprite = PropAssets.GetRandomSprite(PropAssets.Instance.chairSprites);
+                rb.drag = 10f;
                 break;
             case PropType.Table:
                 maxHealth = 5;
                 sp.sprite = PropAssets.GetRandomSprite(PropAssets.Instance.tableSprites);
+                rb.drag = 20f;
                 break;
             default:
                 break;
         }
 
         gameObject.AddComponent<PolygonCollider2D>();
+        fillBoxMax = fillBox.localScale;
     }
 
     private void Update() {
@@ -66,11 +74,13 @@ public class Prop : MonoBehaviour {
         if (currentHealth <= 0) {
             Die();
         }
+
+        fillBox.localScale = new Vector3(fillBoxMax.x * Mathf.Clamp(currentHealth / maxHealth, 0f, 1f), fillBoxMax.y, fillBoxMax.z);
     }
 
     private void Die() {
         //drop item based on rng and item determined by prop type
 
-        Destroy(this);
+        Destroy(gameObject);
     }
 }
