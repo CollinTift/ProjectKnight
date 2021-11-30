@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: {fileID: 49555257781750531, guid: 14fd637596bb80840b7a8021ff24bd7c, type: 3}
-  timeBetweenWaves: 30
+  timeBetweenWaves: 60
   difficultyScale: 0.05
   baseEnemiesPerWave: 5
   difficulty: 1
