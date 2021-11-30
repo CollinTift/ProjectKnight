@@ -182,6 +182,7 @@ MonoBehaviour:
   attackCD: 1
   attackDamage: 1
   iFrameCD: 1
+  fillBox: {fileID: 0}
 --- !u!61 &3510889242458342447
 BoxCollider2D:
   m_ObjectHideFlags: 0

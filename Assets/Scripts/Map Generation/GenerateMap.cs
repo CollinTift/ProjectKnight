@@ -95,6 +95,7 @@ public class GenerateMap : MonoBehaviour {
         vCam.GetComponent<CinemachineConfiner>().m_BoundingShape2D = pc;
 
         SpawnEnemies(GameManager.Instance.enemiesThisWave);
+        SpawnProps(10 + GameManager.Instance.currentWave * 3);
 
         AstarPath.active.Scan();
     }
@@ -122,6 +123,10 @@ public class GenerateMap : MonoBehaviour {
                 randType = Room.RoomType.entrance;
             } else if (index == 1) {
                 randType = Room.RoomType.exit;
+            } else if (index == 2) {
+                randType = Room.RoomType.armory;
+            } else if (index == 3) {
+                randType = Room.RoomType.library;
             } else {
                 randType = (Room.RoomType)Random.Range(0, (int)Room.RoomType.COUNT - 2); //-2 because of entrance and exit
             }
@@ -252,6 +257,51 @@ public class GenerateMap : MonoBehaviour {
                         new Vector3(Random.Range(randRoom.pos.x, randRoom.pos.x + randRoom.width) + .5f, Random.Range(randRoom.pos.y, randRoom.pos.y + randRoom.height) + .5f, 0),
                         Enemy.EnemyType.MageKnight,
                         waveHolder.transform);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void SpawnProps(int numProps) {
+        GameObject propHolder = new GameObject("Prop holder");
+
+        List<Room> spawnableRooms = new List<Room>();
+        spawnableRooms.Clear();
+
+        foreach (Room room in rooms) {
+            switch (room.roomType) {
+                case Room.RoomType.armory:
+                case Room.RoomType.library:
+                case Room.RoomType.diner:
+                    spawnableRooms.Add(room);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        for (int i = 0; i < numProps; i++) {
+            Room randRoom = spawnableRooms[Random.Range(0, spawnableRooms.Count)];
+            switch (randRoom.roomType) {
+                case Room.RoomType.armory:
+                    Prop.SpawnProp(
+                        new Vector3(Random.Range(randRoom.pos.x, randRoom.pos.x + randRoom.width) + .5f, Random.Range(randRoom.pos.y, randRoom.pos.y + randRoom.height) + .5f, 0),
+                        Prop.PropType.Chair,
+                        propHolder.transform);
+                    break;
+                case Room.RoomType.library:
+                    Prop.SpawnProp(
+                        new Vector3(Random.Range(randRoom.pos.x, randRoom.pos.x + randRoom.width) + .5f, Random.Range(randRoom.pos.y, randRoom.pos.y + randRoom.height) + .5f, 0),
+                        Prop.PropType.Book,
+                        propHolder.transform);
+                    break;
+                case Room.RoomType.diner:
+                    Prop.SpawnProp(
+                        new Vector3(Random.Range(randRoom.pos.x, randRoom.pos.x + randRoom.width) + .5f, Random.Range(randRoom.pos.y, randRoom.pos.y + randRoom.height) + .5f, 0),
+                        Prop.PropType.Table,
+                        propHolder.transform);
                     break;
                 default:
                     break;

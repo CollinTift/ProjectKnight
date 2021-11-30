@@ -12,7 +12,8 @@ public class Room {
         empty,
         armory,
         library,
-        loot,
+        treasury,
+        diner,
         entrance,
         exit,
         COUNT

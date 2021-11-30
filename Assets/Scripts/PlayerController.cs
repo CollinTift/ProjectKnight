@@ -26,9 +26,13 @@ public class PlayerController : MonoBehaviour {
     public float iFrameCD = 1f;
     private float iFrameTimer = 0f;
 
+    public RectTransform fillBox;
+    private Vector3 fillBoxMax;
+
     private Animator animator;
 
     private GameManager gm;
+
     void Awake() {
         Instance = this;
 
@@ -40,6 +44,8 @@ public class PlayerController : MonoBehaviour {
         gm = GameManager.Instance;
 
         mouseDir = GetMouseDir();
+        
+        fillBoxMax = fillBox.localScale;
     }
 
     void Update() {
@@ -108,6 +114,8 @@ public class PlayerController : MonoBehaviour {
         }
 
         Debug.Log(currentHealth);
+
+        fillBox.localScale = new Vector3(fillBoxMax.x * Mathf.Clamp((float)currentHealth / (float)maxHealth, 0f, 1f), fillBoxMax.y, fillBoxMax.z);
 
         if (currentHealth <= 0) {
             Die();

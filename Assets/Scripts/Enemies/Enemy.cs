@@ -219,7 +219,7 @@ public class Enemy : MonoBehaviour {
         if (projectile != null && canSpawnProj) {
             GameObject go = Instantiate(projectile, transform.position, Quaternion.identity);
             Projectile proj = go.GetComponent<Projectile>();
-            proj.Launch(PlayerController.Instance.GetPosition() - transform.position, attackDamage, 0.5f);
+            proj.Launch(PlayerController.Instance.GetPosition() - transform.position, attackDamage, 1f);
 
             canSpawnProj = false;
         }
@@ -266,7 +266,10 @@ public class Enemy : MonoBehaviour {
     private void Die() {
         //chance to spawn items
         animator.SetTrigger("Die");
-        GetComponent<Rigidbody2D>().isKinematic = false;
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero;
+        rb.simulated = false;
     }
 
     public void DestroyEnemy() {

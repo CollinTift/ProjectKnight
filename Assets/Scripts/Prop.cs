@@ -24,12 +24,11 @@ public class Prop : MonoBehaviour {
     private Rigidbody2D rb;
 
     public static void SpawnProp(Vector3 worldPos, PropType type, Transform parent) {
-        Instantiate(PropAssets.Instance.propPF, worldPos, Quaternion.identity, parent);
+        Transform newProp = Instantiate(PropAssets.Instance.propPF, worldPos, Quaternion.identity, parent);
+        newProp.GetComponent<Prop>().propType = type;
     }
 
     void Start() {
-        currentHealth = maxHealth;
-
         sp = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -53,6 +52,7 @@ public class Prop : MonoBehaviour {
                 break;
         }
 
+        currentHealth = maxHealth;
         gameObject.AddComponent<PolygonCollider2D>();
         fillBoxMax = fillBox.localScale;
     }
@@ -65,9 +65,9 @@ public class Prop : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         //player is 9, enemy is 10
-        if (collision.collider.gameObject.layer == 9) {
+        if (collision.collider.gameObject.layer == 9 && iFrameTimer >= iFrameCD) {
             currentHealth -= PlayerController.Instance.attackDamage;
-        } else if (collision.collider.gameObject.layer == 10) {
+        } else if (collision.collider.gameObject.layer == 10 && iFrameTimer >= iFrameCD) {
             currentHealth -= collision.collider.GetComponent<Enemy>().attackDamage;
         } else {
             return;
@@ -79,7 +79,7 @@ public class Prop : MonoBehaviour {
             Die();
         }
 
-        fillBox.localScale = new Vector3(fillBoxMax.x * Mathf.Clamp(currentHealth / maxHealth, 0f, 1f), fillBoxMax.y, fillBoxMax.z);
+        fillBox.localScale = new Vector3(fillBoxMax.x * Mathf.Clamp((float)currentHealth / (float)maxHealth, 0f, 1f), fillBoxMax.y, fillBoxMax.z);
     }
 
     private void Die() {
