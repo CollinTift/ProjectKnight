@@ -187,6 +187,7 @@ MonoBehaviour:
   thornsDamage: 0
   iFrameCD: 1
   critChance: 0
+  critMult: 2
   memories: 0
   fillBox: {fileID: 0}
   itemImages:

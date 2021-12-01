@@ -8,6 +8,7 @@ TagManager:
   - Map
   - Attack
   - GameOverUI
+  - Prop
   layers:
   - Default
   - TransparentFX

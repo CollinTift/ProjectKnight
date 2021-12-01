@@ -169,15 +169,11 @@ public class PlayerController : MonoBehaviour {
             foreach (GameObject go in itemImages) {
                 if (go.GetComponent<Image>().sprite == ItemAssets.Instance.GetSprite(item.itemType)) {
                     go.SetActive(true);
-                    Debug.Log(go.ToString() + "is active");
                 }
             }
         } else {
-            Debug.Log("AddAmount runs");
             invItem.AddAmount(1);
         }
-
-        if (invItem == null) Debug.Log("NULL");
 
         switch (item.itemType) {
             case Item.ItemType.Splinter:

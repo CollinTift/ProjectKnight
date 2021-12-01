@@ -35,9 +35,11 @@ public class Enemy : MonoBehaviour {
     private AIDestinationSetter aIDestinationSetter;
     private AIPath aiPath;
 
+    private Rigidbody2D rb;
     private Animator animator;
     private GameObject target;
     private GridGraph gg;
+    private AudioSource aud;
 
     private bool canSpawnProj = true; //must be done bc called in animator, is scuffed
 
@@ -97,9 +99,12 @@ public class Enemy : MonoBehaviour {
         aIDestinationSetter = gameObject.GetComponent<AIDestinationSetter>();
         gg = AstarPath.active.data.gridGraph;
 
+        rb = GetComponent<Rigidbody2D>();
         aiPath = gameObject.GetComponent<AIPath>();
         animator = gameObject.GetComponent<Animator>();
-        target = new GameObject("target");
+        aud = GetComponent<AudioSource>();
+
+        target = new GameObject("target");        
     }
 
     private void Start() {
@@ -159,6 +164,11 @@ public class Enemy : MonoBehaviour {
                     }
                 }
 
+                RaycastHit2D cast = Physics2D.Raycast(transform.position, lookDir, attackRange);
+                if (cast.collider.CompareTag("Prop")) {
+                    state = State.Attacking;
+                }
+
                 break;
             case State.Attacking:
                 //play attack anim; deal damage if hit player
@@ -207,8 +217,6 @@ public class Enemy : MonoBehaviour {
         animator.SetFloat("MoveX", aiPath.velocity.normalized.x);
         animator.SetFloat("MoveY", aiPath.velocity.normalized.y);
         animator.SetFloat("Speed", aiPath.velocity.magnitude);
-
-        //Debug.Log(aiPath.velocity + gameObject.ToString());
     }
 
     public void AllowMovement() {
@@ -216,6 +224,7 @@ public class Enemy : MonoBehaviour {
     }
 
     public void DenyMovement() {
+        rb.velocity = Vector2.zero;
         aiPath.canMove = false;
     }
 
