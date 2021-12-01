@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4467363953241314702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4467363953241314700}
+  - component: {fileID: 4467363953241314701}
+  m_Layer: 0
+  m_Name: ItemAssets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4467363953241314700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4467363953241314702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4467363953241314701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4467363953241314702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc629e4c4a1e8949abc12d203a62b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPF: {fileID: 2969314854100479057, guid: 1037babc3098fdf47b92f393673fab2f, type: 3}
+  splinterSprite: {fileID: 21300000, guid: cf947313646a3f445b5571210d0b49db, type: 3}
+  pageSprite: {fileID: 21300000, guid: d5b7889e653b08e45804c78bbe9ae5c2, type: 3}
+  accountSprite: {fileID: 21300000, guid: 9a4035797ee61b947a6d33f0a4099918, type: 3}
+  bootSprite: {fileID: 21300000, guid: 3f076851796a2194188795fd6df0c69a, type: 3}
+  shieldSprite: {fileID: 21300000, guid: 81dae87c288213647ae518dd6b9debc6, type: 3}
+  hatSprite: {fileID: 21300000, guid: 30cb8e81146c361499602ffaca590b36, type: 3}
+  breadSprite: {fileID: 21300000, guid: c3464a98ce54ee54db62595b17b04a48, type: 3}
+  swordSprite: {fileID: 21300000, guid: f35f52a1d7e9d5b45a1b90554c2eed40, type: 3}
+  tomeSprite: {fileID: 21300000, guid: be0dff0ad28e798448c4178e79451aed, type: 3}

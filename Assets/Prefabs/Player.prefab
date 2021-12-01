@@ -163,7 +163,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &3510889242458342441
 MonoBehaviour:
@@ -179,10 +179,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   maxHealth: 10
+  healPerWave: 1
+  maxChaos: 10
+  dashSpeedMultiplier: 2
   attackCD: 1
   attackDamage: 1
+  thornsDamage: 0
   iFrameCD: 1
+  critChance: 0
+  memories: 0
   fillBox: {fileID: 0}
+  itemImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!61 &3510889242458342447
 BoxCollider2D:
   m_ObjectHideFlags: 0

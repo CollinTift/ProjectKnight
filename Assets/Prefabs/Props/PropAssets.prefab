@@ -65,3 +65,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 86ef252b0b7220a46bf483ccc71d459c, type: 3}
   tableSprites:
   - {fileID: 21300000, guid: a536fd0ccf39bc2408394bdd77b9d617, type: 3}
+  rackSprites:
+  - {fileID: 2742715300562056075, guid: 9caad8a9975286240b6f67fff69f52f0, type: 3}
+  - {fileID: -5453736837400011738, guid: 9caad8a9975286240b6f67fff69f52f0, type: 3}
+  - {fileID: 551395969140315850, guid: 9caad8a9975286240b6f67fff69f52f0, type: 3}
+  - {fileID: 4597874126120265987, guid: 9caad8a9975286240b6f67fff69f52f0, type: 3}
+  - {fileID: -4908772808918939431, guid: 9caad8a9975286240b6f67fff69f52f0, type: 3}
+  - {fileID: 1128160242967161454, guid: 9caad8a9975286240b6f67fff69f52f0, type: 3}
+  - {fileID: -4828624252528437101, guid: 9caad8a9975286240b6f67fff69f52f0, type: 3}
+  - {fileID: -1005677095132372551, guid: 9caad8a9975286240b6f67fff69f52f0, type: 3}
+  shelfSprites:
+  - {fileID: -8174865062497381088, guid: 2adb36e0d0d6b00419edec49714835d3, type: 3}
+  - {fileID: -1783843868825997599, guid: 2adb36e0d0d6b00419edec49714835d3, type: 3}
+  - {fileID: -6777778257273526093, guid: 2adb36e0d0d6b00419edec49714835d3, type: 3}
+  platterSprites:
+  - {fileID: 21300000, guid: 6b4d47b62e047144ebfe385b3aab5096, type: 3}

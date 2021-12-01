@@ -103,6 +103,7 @@ public class GenerateMap : MonoBehaviour {
     private void Update() {
         if (GameManager.Instance.enemiesThisWave > 0) {
             SpawnEnemies(GameManager.Instance.enemiesThisWave);
+            PlayerController.Instance.Heal(PlayerController.Instance.healPerWave);
             GameManager.Instance.enemiesThisWave = 0;
         }
     }
@@ -245,22 +246,29 @@ public class GenerateMap : MonoBehaviour {
 
         for (int i = 0; i < numEnemies; i++) {
             Room randRoom = spawnableRooms[Random.Range(0, spawnableRooms.Count)];
+
+            Transform enemy;
+
             switch (randRoom.roomType) {
                 case Room.RoomType.armory:
-                    Enemy.SpawnEnemy(
+                    enemy = Enemy.SpawnEnemy(
                         new Vector3(Random.Range(randRoom.pos.x, randRoom.pos.x + randRoom.width) + .5f, Random.Range(randRoom.pos.y, randRoom.pos.y + randRoom.height) + .5f, 0),
                         Enemy.EnemyType.SwordKnight,
                         waveHolder.transform);
                     break;
                 case Room.RoomType.library:
-                    Enemy.SpawnEnemy(
+                    enemy = Enemy.SpawnEnemy(
                         new Vector3(Random.Range(randRoom.pos.x, randRoom.pos.x + randRoom.width) + .5f, Random.Range(randRoom.pos.y, randRoom.pos.y + randRoom.height) + .5f, 0),
                         Enemy.EnemyType.MageKnight,
                         waveHolder.transform);
                     break;
                 default:
+                    enemy = null;
                     break;
             }
+
+            enemy.GetComponent<Enemy>().maxHealth += GameManager.Instance.currentWave;
+            enemy.GetComponent<Enemy>().attackDamage += GameManager.Instance.currentWave;
         }
     }
 
@@ -284,28 +292,73 @@ public class GenerateMap : MonoBehaviour {
 
         for (int i = 0; i < numProps; i++) {
             Room randRoom = spawnableRooms[Random.Range(0, spawnableRooms.Count)];
+            int randProp;
+            Prop.PropType randType;
+
             switch (randRoom.roomType) {
+                default:
                 case Room.RoomType.armory:
-                    Prop.SpawnProp(
-                        new Vector3(Random.Range(randRoom.pos.x, randRoom.pos.x + randRoom.width) + .5f, Random.Range(randRoom.pos.y, randRoom.pos.y + randRoom.height) + .5f, 0),
-                        Prop.PropType.Chair,
-                        propHolder.transform);
+                    //spawn weapon racks, tables, chairs
+                    randProp = Random.Range(0, 3);
+
+                    switch(randProp) {
+                        default:
+                        case 0:
+                            randType = Prop.PropType.WeaponRack;
+                            break;
+                        case 1:
+                            randType = Prop.PropType.Table;
+                            break;
+                        case 2:
+                            randType = Prop.PropType.Chair;
+                            break;
+                    }
+
                     break;
                 case Room.RoomType.library:
-                    Prop.SpawnProp(
-                        new Vector3(Random.Range(randRoom.pos.x, randRoom.pos.x + randRoom.width) + .5f, Random.Range(randRoom.pos.y, randRoom.pos.y + randRoom.height) + .5f, 0),
-                        Prop.PropType.Book,
-                        propHolder.transform);
+                    //spawn books, tables, chairs, bookshelves
+                    randProp = Random.Range(0, 4);
+
+                    switch (randProp) {
+                        default:
+                        case 0:
+                            randType = Prop.PropType.Book;
+                            break;
+                        case 1:
+                            randType = Prop.PropType.Table;
+                            break;
+                        case 2:
+                            randType = Prop.PropType.Chair;
+                            break;
+                        case 3:
+                            randType = Prop.PropType.Bookshelf;
+                            break;
+                    }
                     break;
                 case Room.RoomType.diner:
-                    Prop.SpawnProp(
-                        new Vector3(Random.Range(randRoom.pos.x, randRoom.pos.x + randRoom.width) + .5f, Random.Range(randRoom.pos.y, randRoom.pos.y + randRoom.height) + .5f, 0),
-                        Prop.PropType.Table,
-                        propHolder.transform);
-                    break;
-                default:
+                    //spawn platters, tables, chairs
+                    randProp = Random.Range(0, 3);
+
+                    switch (randProp) {
+                        default:
+                        case 0:
+                            randType = Prop.PropType.Platter;
+                            break;
+                        case 1:
+                            randType = Prop.PropType.Table;
+                            break;
+                        case 2:
+                            randType = Prop.PropType.Chair;
+                            break;
+                    }
+                    
                     break;
             }
+
+            Prop.SpawnProp(
+                new Vector3(Random.Range(randRoom.pos.x, randRoom.pos.x + randRoom.width) + .5f, Random.Range(randRoom.pos.y, randRoom.pos.y + randRoom.height) + .5f, 0),
+                randType,
+                propHolder.transform);
         }
     }
 

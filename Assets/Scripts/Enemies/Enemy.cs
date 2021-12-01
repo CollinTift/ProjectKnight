@@ -5,7 +5,7 @@ using Pathfinding;
 
 public class Enemy : MonoBehaviour {
     [Header("Health")]
-    [SerializeField] private int maxHealth;
+    public int maxHealth;
     private int currentHealth;
 
     public EnemyType type;
@@ -67,22 +67,26 @@ public class Enemy : MonoBehaviour {
     private bool lastWasAttack = true;
     private bool shielding = false;
 
-    public static void SpawnEnemy(Vector3 worldPos, EnemyType type, Transform parent) {
+    public static Transform SpawnEnemy(Vector3 worldPos, EnemyType type, Transform parent) {
+        Transform newEnemy;
+
         switch (type) {
             default:
             case EnemyType.SwordKnight:
-                Instantiate(EnemyAssets.Instance.swordKnightPF, worldPos, Quaternion.identity, parent);
+                newEnemy = Instantiate(EnemyAssets.Instance.swordKnightPF, worldPos, Quaternion.identity, parent);
                 break;
             case EnemyType.MageKnight:
-                Instantiate(EnemyAssets.Instance.mageKnightPF, worldPos, Quaternion.identity, parent);
+                newEnemy = Instantiate(EnemyAssets.Instance.mageKnightPF, worldPos, Quaternion.identity, parent);
                 break;
             case EnemyType.CaptainKnight:
-                Instantiate(EnemyAssets.Instance.captainKnightPF, worldPos, Quaternion.identity, parent);
+                newEnemy = Instantiate(EnemyAssets.Instance.captainKnightPF, worldPos, Quaternion.identity, parent);
                 break;
             case EnemyType.ArchMage:
-                Instantiate(EnemyAssets.Instance.archMagePF, worldPos, Quaternion.identity, parent);
+                newEnemy = Instantiate(EnemyAssets.Instance.archMagePF, worldPos, Quaternion.identity, parent);
                 break;
         }
+
+        return newEnemy;
     }
 
     private void Awake() {
@@ -237,7 +241,14 @@ public class Enemy : MonoBehaviour {
                     //play shield bounce sound
                 } else {
                     //play damage sound
-                    Damage(PlayerController.Instance.attackDamage);
+
+                    //handle crits
+                    int randCrit = Random.Range(0, 100);
+                    if (randCrit < PlayerController.Instance.critChance) {
+                        Damage(Mathf.RoundToInt(PlayerController.Instance.attackDamage * PlayerController.Instance.critMult));
+                    } else {
+                        Damage(PlayerController.Instance.attackDamage);
+                    }
                 }
 
                 iFrameTimer = 0f;
@@ -266,6 +277,28 @@ public class Enemy : MonoBehaviour {
     private void Die() {
         //chance to spawn items
         animator.SetTrigger("Die");
+
+        int randDrop = Random.Range(0, 100);
+        switch (type) {
+            case EnemyType.SwordKnight:
+                if (randDrop < 5) {
+                    Item.SpawnItem(transform.position, Item.ItemType.Shield);
+                } else if (randDrop >= 5 && randDrop < 10) {
+                    Item.SpawnItem(transform.position, Item.ItemType.Sword);
+                } else if (randDrop >= 10 && randDrop < 30) {
+                    Item.SpawnItem(transform.position, Item.ItemType.Boot);
+                }
+
+                break;
+            case EnemyType.MageKnight:
+                if (randDrop < 10) {
+                    Item.SpawnItem(transform.position, Item.ItemType.Tome);
+                } else if (randDrop >= 10 && randDrop < 30) {
+                    Item.SpawnItem(transform.position, Item.ItemType.Hat);
+                }
+
+                break;
+        }
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
