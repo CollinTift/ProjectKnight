@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private IEnumerator Dash() {
-        for (float dashSpd = speed * dashSpeedMultiplier; dashSpd >= speed; dashSpd -= 0.1f) {
+        for (float dashSpd = speed * dashSpeedMultiplier; dashSpd >= speed; dashSpd -= 0.05f) {
             move = new Vector2(hor, ver);
             move = move.normalized * dashSpd;
             yield return null;
@@ -153,24 +153,27 @@ public class PlayerController : MonoBehaviour {
         InventoryItem invItem = null;
         
         bool existsInInv = false;
-        //InventoryItem existingInvItem = null;
 
         foreach (InventoryItem existingItem in inventory) {
             if (existingItem.item.itemType == item.itemType) {
                 existsInInv = true;
                 invItem = existingItem;
+                break;
             }
         }
 
         if (!existsInInv) {
             invItem = new InventoryItem(item, 1);
+            inventory.Add(invItem);
 
             foreach (GameObject go in itemImages) {
                 if (go.GetComponent<Image>().sprite == ItemAssets.Instance.GetSprite(item.itemType)) {
                     go.SetActive(true);
+                    Debug.Log(go.ToString() + "is active");
                 }
             }
         } else {
+            Debug.Log("AddAmount runs");
             invItem.AddAmount(1);
         }
 
@@ -179,30 +182,26 @@ public class PlayerController : MonoBehaviour {
         switch (item.itemType) {
             case Item.ItemType.Splinter:
                 thornsDamage++;
-                //if (!itemImages[0].activeInHierarchy) itemImages[0].SetActive(true);
                 
-                itemImages[0].GetComponentInChildren<TextMeshProUGUI>().text = invItem.amount.ToString();
+                itemImages[0].GetComponentInChildren<TextMeshProUGUI>().text = "" + invItem.amount;
 
                 break;
             case Item.ItemType.Page:
                 memories++;
-                //if (!itemImages[1].activeInHierarchy) itemImages[1].SetActive(true);
 
-                itemImages[1].GetComponentInChildren<TextMeshProUGUI>().text = invItem.amount.ToString();
+                itemImages[1].GetComponentInChildren<TextMeshProUGUI>().text = "" + invItem.amount;
 
                 break;
             case Item.ItemType.Account:
                 critChance += 5;
-                //if (!itemImages[2].activeInHierarchy) itemImages[2].SetActive(true);
 
-                itemImages[2].GetComponentInChildren<TextMeshProUGUI>().text = invItem.amount.ToString();
+                itemImages[2].GetComponentInChildren<TextMeshProUGUI>().text = "" + invItem.amount;
 
                 break;
             case Item.ItemType.Boot:
                 speed += 0.25f;
-                //if (!itemImages[3].activeInHierarchy) itemImages[3].SetActive(true);
 
-                itemImages[3].GetComponentInChildren<TextMeshProUGUI>().text = invItem.amount.ToString();
+                itemImages[3].GetComponentInChildren<TextMeshProUGUI>().text = "" + invItem.amount;
 
                 break;
             case Item.ItemType.Shield:
@@ -210,42 +209,38 @@ public class PlayerController : MonoBehaviour {
                 currentHealth++;
                 fillBox.localScale = new Vector3(fillBoxMax.x * Mathf.Clamp((float)currentHealth / (float)maxHealth, 0f, 1f), fillBoxMax.y, fillBoxMax.z);
 
-                //if (!itemImages[4].activeInHierarchy) itemImages[4].SetActive(true);
-
-                itemImages[4].GetComponentInChildren<TextMeshProUGUI>().text = invItem.amount.ToString();
+                itemImages[4].GetComponentInChildren<TextMeshProUGUI>().text = "" + invItem.amount;
 
                 break;
             case Item.ItemType.Hat:
                 maxChaos++;
                 currentChaos++;
-                //if (!itemImages[5].activeInHierarchy) itemImages[5].SetActive(true);
 
-                itemImages[5].GetComponentInChildren<TextMeshProUGUI>().text = invItem.amount.ToString();
+                itemImages[5].GetComponentInChildren<TextMeshProUGUI>().text = "" + invItem.amount;
 
                 break;
             case Item.ItemType.Bread:
                 healPerWave++;
                 Heal(1);
-                //if (!itemImages[6].activeInHierarchy) itemImages[6].SetActive(true);
 
-                itemImages[6].GetComponentInChildren<TextMeshProUGUI>().text = invItem.amount.ToString();
+                itemImages[6].GetComponentInChildren<TextMeshProUGUI>().text = "" + invItem.amount;
 
                 break;
             case Item.ItemType.Sword:
                 attackDamage++;
-                //if (!itemImages[7].activeInHierarchy) itemImages[7].SetActive(true);
 
-                itemImages[7].GetComponentInChildren<TextMeshProUGUI>().text = invItem.amount.ToString();
+                itemImages[7].GetComponentInChildren<TextMeshProUGUI>().text = "" + invItem.amount;
 
                 break;
             case Item.ItemType.Tome:
                 critMult += .1f;
-                //if (!itemImages[8].activeInHierarchy) itemImages[8].SetActive(true);
 
-                itemImages[8].GetComponentInChildren<TextMeshProUGUI>().text = invItem.amount.ToString();
+                itemImages[8].GetComponentInChildren<TextMeshProUGUI>().text = "" + invItem.amount;
 
                 break;
         }
+
+        Debug.Log(invItem.amount);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
@@ -306,7 +301,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         public void AddAmount(int amount) {
-            this.amount += amount;
+            this.amount = this.amount + amount;
         }
     }
 }

@@ -254,6 +254,8 @@ public class Enemy : MonoBehaviour {
                 iFrameTimer = 0f;
             }
         }
+
+        fillBox.localScale = new Vector3(fillBoxMax.x * Mathf.Clamp((float)currentHealth / (float)maxHealth, 0f, 1f), fillBoxMax.y, fillBoxMax.z);
     }
 
     public void SetShielding(int even) {
@@ -271,7 +273,7 @@ public class Enemy : MonoBehaviour {
 
         if (currentHealth <= 0) Die();
         
-        fillBox.localScale = new Vector3(fillBoxMax.x * Mathf.Clamp((float)currentHealth / (float)maxHealth, 0f, 1f), fillBoxMax.y, fillBoxMax.z);
+        //fillBox.localScale = new Vector3(fillBoxMax.x * Mathf.Clamp((float)currentHealth / (float)maxHealth, 0f, 1f), fillBoxMax.y, fillBoxMax.z);
     }
 
     private void Die() {

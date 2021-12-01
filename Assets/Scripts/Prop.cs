@@ -7,7 +7,7 @@ public class Prop : MonoBehaviour {
     private int currentHealth;
 
     private float iFrameTimer = 0f;
-    private float iFrameCD = .8f;
+    private float iFrameCD = .6f;
 
     public enum PropType {
         Book,
@@ -34,6 +34,7 @@ public class Prop : MonoBehaviour {
     void Start() {
         sp = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
         switch (propType) {
             case PropType.Book:
