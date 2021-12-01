@@ -56,6 +56,19 @@ public class GameManager : MonoBehaviour {
         currentFloor++;
         timeBetweenWaves -= 1f;
         //kill all enemies, kill all props, kill all items, generate new map,  teleport player to spawn, setup everything again
+
+        foreach (GameObject go in FindObjectsOfType(typeof(GameObject))) {
+            if (go.layer == 7 || go.layer == 11) {
+                if (go.GetComponent<Enemy>() != null) {
+                    go.GetComponent<Enemy>().DestroyEnemy();
+                } else {
+                    Destroy(go);
+                }
+            }
+        }
+
+        GenerateMap generateMap = FindObjectOfType<GenerateMap>();
+        generateMap.SetupMap();
     }
 
     public void enableGameOver() {
