@@ -94,10 +94,12 @@ public class GenerateMap : MonoBehaviour {
     }
 
     public void SetupMap() {
+        ApplyBase();
+
         GenerateRooms();
         UpdateBaseTiles();
 
-        SpawnEnemies(GameManager.Instance.enemiesThisWave);
+        if (GameManager.Instance.enemiesThisWave > 0) SpawnEnemies(GameManager.Instance.enemiesThisWave);
         SpawnProps(10 + GameManager.Instance.currentWave * 3);
 
         AstarPath.active.Scan();
@@ -232,6 +234,7 @@ public class GenerateMap : MonoBehaviour {
 
     private void SpawnEnemies(int numEnemies) {
         GameObject waveHolder = new GameObject("Wave: " + GameManager.Instance.currentWave + ", Num: " + GameManager.Instance.enemiesThisWave);
+        waveHolder.layer = 7;
 
         List<Room> spawnableRooms = new List<Room>();
         spawnableRooms.Clear();

@@ -321,7 +321,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void AddChaos(int chaos) {
-        if (currentChaos <= maxChaos) {
+        if (currentChaos + chaos <= maxChaos) {
             currentChaos += chaos;
         } else {
             currentChaos = maxChaos;

@@ -93,7 +93,6 @@ public class Enemy : MonoBehaviour {
 
     private void Awake() {
         state = State.Roaming;
-        currentHealth = maxHealth;
 
         //for now
         aIDestinationSetter = gameObject.GetComponent<AIDestinationSetter>();
@@ -110,6 +109,7 @@ public class Enemy : MonoBehaviour {
 
     private void Start() {
         homePos = transform.position;
+        currentHealth = maxHealth;
 
         SetTarget(GetRoamingPos());
         aIDestinationSetter.target = target.transform;
