@@ -1068,6 +1068,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8638432193355453964, guid: 666afddceaf26284e876bc31d5a74bed, type: 3}
   m_PrefabInstance: {fileID: 1775488854}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &1779715556 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1779715556, guid: 62afb381b39c6c0429c99bcb5135ecd7, type: 3}
+  m_PrefabInstance: {fileID: 3213004088152214027}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1824395178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1829,7 +1834,11 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3510889242458342441, guid: d38b85393f5245a48aa454da3ab7bf82, type: 3}
-      propertyPath: fillBox
+      propertyPath: chaosFillBox
+      value: 
+      objectReference: {fileID: 1779715556}
+    - target: {fileID: 3510889242458342441, guid: d38b85393f5245a48aa454da3ab7bf82, type: 3}
+      propertyPath: healthFillBox
       value: 
       objectReference: {fileID: 1169822683}
     - target: {fileID: 3510889242458342441, guid: d38b85393f5245a48aa454da3ab7bf82, type: 3}

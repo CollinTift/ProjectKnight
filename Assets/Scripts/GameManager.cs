@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
     public GameObject gameOver;
 
     [Header("Editable fields")]
-    public float timeBetweenWaves = 10f; //time in seconds between each wave
+    public float timeBetweenWaves = 60f; //time in seconds between each wave
     public float difficultyScale = .05f; //percent of difficulty increase
     public int baseEnemiesPerWave = 5; //enemies per wave at wave 0, increases based on difficulty
 
@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour {
     public float difficulty = 1f;
     public int currentWave = 0;
     public int enemiesThisWave = 0;
+
+    public int currentFloor = 1;
 
     private float currentWaveTimer = 0f;
 
@@ -48,6 +50,12 @@ public class GameManager : MonoBehaviour {
 
             currentWaveTimer = 0f;
         }
+    }
+
+    public void nextFloor() {
+        currentFloor++;
+        timeBetweenWaves -= 1f;
+        //kill all enemies, kill all props, generate new map,  teleport player to spawn, setup everything again
     }
 
     public void enableGameOver() {

@@ -144,6 +144,8 @@ public class Prop : MonoBehaviour {
                 break;
         }
 
+        PlayerController.Instance.currentChaos++;
+
         Destroy(gameObject);
     }
 }

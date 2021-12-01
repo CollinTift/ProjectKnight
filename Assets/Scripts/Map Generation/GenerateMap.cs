@@ -64,10 +64,6 @@ public class GenerateMap : MonoBehaviour {
             }
         }
 
-        GenerateRooms();
-
-        UpdateBaseTiles();
-
         rb = gameObject.AddComponent<Rigidbody2D>();
         tc = gameObject.AddComponent<TilemapCollider2D>();
         cc = gameObject.AddComponent<CompositeCollider2D>();
@@ -93,6 +89,13 @@ public class GenerateMap : MonoBehaviour {
         };
 
         vCam.GetComponent<CinemachineConfiner>().m_BoundingShape2D = pc;
+
+        SetupMap();
+    }
+
+    public void SetupMap() {
+        GenerateRooms();
+        UpdateBaseTiles();
 
         SpawnEnemies(GameManager.Instance.enemiesThisWave);
         SpawnProps(10 + GameManager.Instance.currentWave * 3);

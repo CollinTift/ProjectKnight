@@ -1,16 +1,7 @@
 fileFormatVersion: 2
-guid: 2adb36e0d0d6b00419edec49714835d3
+guid: c2c41db165d8caf4ebc7badc9431c877
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -8174865062497381088
-    second: Bookshelf_0
-  - first:
-      213: -1783843868825997599
-    second: Bookshelf_1
-  - first:
-      213: -6777778257273526093
-    second: Bookshelf_2
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -50,13 +41,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 4, y: 4, z: 4, w: 4}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -110,82 +101,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Bookshelf_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -5, y: 5}
-        - {x: -5, y: -6}
-        - {x: 5, y: -6}
-        - {x: 5, y: 5}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0259717b98b0d8e80800000000000000
-      internalID: -8174865062497381088
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bookshelf_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -5, y: 5}
-        - {x: -5, y: -6}
-        - {x: 5, y: -6}
-        - {x: 5, y: 5}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1ee2ed7d3738e37e0800000000000000
-      internalID: -1783843868825997599
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bookshelf_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -5, y: 5}
-        - {x: -5, y: -6}
-        - {x: 5, y: -6}
-        - {x: 5, y: 5}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3b868d0d59e70f1a0800000000000000
-      internalID: -6777778257273526093
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []

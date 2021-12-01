@@ -24,14 +24,16 @@ public class PlayerController : MonoBehaviour {
     public int healPerWave = 1;
 
     public int maxChaos = 10;
-    private int currentChaos;
-    private float chaosLossCD = 5f;
+    public int currentChaos;
+    private float chaosLossCD = 10f;
     private float chaosLossTimer = 0f;
 
-    public float dashSpeedMultiplier = 2f;
+    public float dashSpeedMultiplier = 5f;
 
     public float attackCD = 1f;
     private float attackTimer = 0f;
+
+    private int shielding = 0;
 
     public int attackDamage = 1;
     public int thornsDamage = 0;
@@ -43,8 +45,11 @@ public class PlayerController : MonoBehaviour {
     public float critMult = 2f;
     public int memories = 0;
 
-    public RectTransform fillBox;
-    private Vector3 fillBoxMax;
+    public RectTransform healthFillBox;
+    private Vector3 healthFillBoxMax;
+
+    public RectTransform chaosFillBox;
+    private Vector2 chaosFillBoxMax; //stores width and height of max Rect
 
     private Animator animator;
 
@@ -53,6 +58,8 @@ public class PlayerController : MonoBehaviour {
     private List<InventoryItem> inventory;
     //must be 9 objects, one for each type
     public GameObject[] itemImages;
+
+    public GameObject shield;
 
     void Awake() {
         Instance = this;
@@ -67,7 +74,8 @@ public class PlayerController : MonoBehaviour {
 
         mouseDir = GetMouseDir();
         
-        fillBoxMax = fillBox.localScale;
+        healthFillBoxMax = healthFillBox.localScale;
+        chaosFillBoxMax = new Vector2(chaosFillBox.rect.width, chaosFillBox.rect.height);
 
         inventory = new List<InventoryItem>();
         inventory.Clear();
@@ -84,11 +92,20 @@ public class PlayerController : MonoBehaviour {
 
             if (iFrameTimer < iFrameCD) iFrameTimer += Time.deltaTime;
 
-            if (chaosLossTimer < chaosLossCD) {
-                chaosLossTimer += Time.deltaTime;
+            if (shielding > 0) {
+                shield.SetActive(true);
             } else {
-                currentChaos--;
-                chaosLossTimer = 0f;
+                shield.SetActive(false);
+            }
+
+            if (currentChaos > 0) {
+                if (chaosLossTimer < chaosLossCD) {
+                    chaosLossTimer += Time.deltaTime;
+                } else {
+                    currentChaos--;
+                    chaosFillBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, chaosFillBoxMax.x * (float)currentChaos / (float)maxChaos);
+                    chaosLossTimer = 0f;
+                }
             }
 
             if (attackTimer < attackCD) {
@@ -97,13 +114,22 @@ public class PlayerController : MonoBehaviour {
                 if (Input.GetKeyDown(KeyCode.Mouse0)) Attack();
             }
 
-            if (currentChaos < maxChaos - 1) {
+            if (currentChaos <= maxChaos && currentChaos > 0) {
                 if (Input.GetKeyDown(KeyCode.Space)) {
-                    currentChaos--;
-                    StartCoroutine("Dash");
+                    if (!Mathf.Approximately(hor, 0f) && !Mathf.Approximately(ver, 0f)) {
+                        currentChaos--;
+                        chaosFillBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, chaosFillBoxMax.x * (float)currentChaos / (float)maxChaos);
+                        StartCoroutine("Dash");
+                    } else {
+                        currentChaos--;
+                        chaosFillBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, chaosFillBoxMax.x * (float)currentChaos / (float)maxChaos);
+                        shielding++;
+                    }
                 }
             }
         }
+
+        Debug.Log("Current Chaos: " + currentChaos);
     }
 
     void FixedUpdate() {
@@ -140,6 +166,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private IEnumerator Dash() {
+        Debug.Log("Dash");
+
         for (float dashSpd = speed * dashSpeedMultiplier; dashSpd >= speed; dashSpd -= 0.05f) {
             move = new Vector2(hor, ver);
             move = move.normalized * dashSpd;
@@ -203,7 +231,7 @@ public class PlayerController : MonoBehaviour {
             case Item.ItemType.Shield:
                 maxHealth++;
                 currentHealth++;
-                fillBox.localScale = new Vector3(fillBoxMax.x * Mathf.Clamp((float)currentHealth / (float)maxHealth, 0f, 1f), fillBoxMax.y, fillBoxMax.z);
+                healthFillBox.localScale = new Vector3(healthFillBoxMax.x * Mathf.Clamp((float)currentHealth / (float)maxHealth, 0f, 1f), healthFillBoxMax.y, healthFillBoxMax.z);
 
                 itemImages[4].GetComponentInChildren<TextMeshProUGUI>().text = "" + invItem.amount;
 
@@ -211,6 +239,7 @@ public class PlayerController : MonoBehaviour {
             case Item.ItemType.Hat:
                 maxChaos++;
                 currentChaos++;
+                chaosFillBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, chaosFillBoxMax.x * (float)currentChaos / (float)maxChaos);
 
                 itemImages[5].GetComponentInChildren<TextMeshProUGUI>().text = "" + invItem.amount;
 
@@ -252,12 +281,20 @@ public class PlayerController : MonoBehaviour {
 
     public void Damage(int damage) {
         if (currentHealth > 0) {
-            currentHealth -= damage;
+            if (shielding > 0) {
+                shielding -= damage;
 
-            animator.SetTrigger("Damage");
+                if (shielding < 0) {
+                    currentHealth += shielding;
+                    shielding = 0;
+                }
+            } else {
+                currentHealth -= damage;
+                animator.SetTrigger("Damage");
+            }
         }
 
-        fillBox.localScale = new Vector3(fillBoxMax.x * Mathf.Clamp((float)currentHealth / (float)maxHealth, 0f, 1f), fillBoxMax.y, fillBoxMax.z);
+        healthFillBox.localScale = new Vector3(healthFillBoxMax.x * Mathf.Clamp((float)currentHealth / (float)maxHealth, 0f, 1f), healthFillBoxMax.y, healthFillBoxMax.z);
 
         if (currentHealth <= 0) {
             Die();

@@ -100,6 +100,7 @@ public class Enemy : MonoBehaviour {
         gg = AstarPath.active.data.gridGraph;
 
         rb = GetComponent<Rigidbody2D>();
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         aiPath = gameObject.GetComponent<AIPath>();
         animator = gameObject.GetComponent<Animator>();
         aud = GetComponent<AudioSource>();
@@ -283,8 +284,8 @@ public class Enemy : MonoBehaviour {
         animator.SetTrigger("Damage");
 
         if (currentHealth <= 0) Die();
-        
-        
+
+        PlayerController.Instance.currentChaos++;
     }
 
     private void Die() {
