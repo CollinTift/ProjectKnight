@@ -9,6 +9,7 @@ TagManager:
   - Attack
   - GameOverUI
   - Prop
+  - MustLive
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Map
   - PlayerAttack
   - EnemyAttack
-  - 
+  - Item
   - 
   - 
   - 

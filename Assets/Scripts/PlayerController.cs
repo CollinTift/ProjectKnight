@@ -311,6 +311,16 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public void AddChaos(int chaos) {
+        if (currentChaos <= maxChaos) {
+            currentChaos += chaos;
+        } else {
+            currentChaos = maxChaos;
+        }
+        
+        chaosFillBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, chaosFillBoxMax.x * (float)currentChaos / (float)maxChaos);
+    }
+
     private void Die() {
         animator.SetTrigger("Die");
 

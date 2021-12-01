@@ -284,11 +284,11 @@ public class Enemy : MonoBehaviour {
         animator.SetTrigger("Damage");
 
         if (currentHealth <= 0) Die();
-
-        PlayerController.Instance.currentChaos++;
     }
 
     private void Die() {
+        PlayerController.Instance.AddChaos(maxHealth);
+
         //chance to spawn items
         animator.SetTrigger("Die");
 

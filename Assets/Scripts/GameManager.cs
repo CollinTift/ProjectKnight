@@ -52,10 +52,10 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void nextFloor() {
+    public void NextFloor() {
         currentFloor++;
         timeBetweenWaves -= 1f;
-        //kill all enemies, kill all props, generate new map,  teleport player to spawn, setup everything again
+        //kill all enemies, kill all props, kill all items, generate new map,  teleport player to spawn, setup everything again
     }
 
     public void enableGameOver() {
