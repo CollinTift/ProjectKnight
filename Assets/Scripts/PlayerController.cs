@@ -28,7 +28,9 @@ public class PlayerController : MonoBehaviour {
     private float chaosLossCD = 10f;
     private float chaosLossTimer = 0f;
 
-    public float dashSpeedMultiplier = 5f;
+    public float dashSpeedMultiplier = 50f;
+    private float dashTimer = 0f;
+    private float dashLength = 1f;
 
     public float attackCD = 1f;
     private float attackTimer = 0f;
@@ -44,6 +46,8 @@ public class PlayerController : MonoBehaviour {
     public int critChance = 0;
     public float critMult = 2f;
     public int memories = 0;
+
+    private bool dashing = false;
 
     public RectTransform healthFillBox;
     private Vector3 healthFillBoxMax;
@@ -116,10 +120,11 @@ public class PlayerController : MonoBehaviour {
 
             if (currentChaos <= maxChaos && currentChaos > 0) {
                 if (Input.GetKeyDown(KeyCode.Space)) {
-                    if (!Mathf.Approximately(hor, 0f) && !Mathf.Approximately(ver, 0f)) {
+                    if (Mathf.Abs(move.x) >= .2f || Mathf.Abs(move.y) >= .2f) {
                         currentChaos--;
                         chaosFillBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, chaosFillBoxMax.x * (float)currentChaos / (float)maxChaos);
-                        StartCoroutine("Dash");
+                        //StartCoroutine("Dash");
+                        Dash();
                     } else {
                         currentChaos--;
                         chaosFillBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, chaosFillBoxMax.x * (float)currentChaos / (float)maxChaos);
@@ -127,13 +132,24 @@ public class PlayerController : MonoBehaviour {
                     }
                 }
             }
-        }
 
-        Debug.Log("Current Chaos: " + currentChaos);
+            if (dashing) {
+                dashTimer += Time.deltaTime;
+
+                if (dashTimer >= dashLength) {
+                    dashing = false;
+                    dashTimer = 0f;
+                }
+            }
+        }
     }
 
     void FixedUpdate() {
-        rb.velocity = move;
+        if (dashing) {
+            rb.velocity = move * dashSpeedMultiplier;
+        } else {
+            rb.velocity = move;
+        }
     }
 
     private void Move() {
@@ -165,16 +181,9 @@ public class PlayerController : MonoBehaviour {
         attackTimer = 0f;
     }
 
-    private IEnumerator Dash() {
-        Debug.Log("Dash");
-
-        for (float dashSpd = speed * dashSpeedMultiplier; dashSpd >= speed; dashSpd -= 0.05f) {
-            move = new Vector2(hor, ver);
-            move = move.normalized * dashSpd;
-            yield return null;
-        }
-
-        StopCoroutine("Dash");
+    private void Dash() {
+        dashing = true;
+        rb.velocity = Vector2.zero;
     }
 
     public void AddItem(Item item) {

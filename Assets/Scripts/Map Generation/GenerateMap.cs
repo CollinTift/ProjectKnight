@@ -288,6 +288,9 @@ public class GenerateMap : MonoBehaviour {
                 case Room.RoomType.diner:
                     spawnableRooms.Add(room);
                     break;
+                case Room.RoomType.exit:
+                    Portal.SpawnPortal(new Vector3(Random.Range(room.pos.x, room.pos.x + room.width) + .5f, Random.Range(room.pos.y, room.pos.y + room.height) + .5f, 0f));
+                    break;
                 default:
                     break;
             }

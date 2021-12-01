@@ -144,7 +144,7 @@ public class Prop : MonoBehaviour {
                 break;
         }
 
-        PlayerController.Instance.currentChaos++;
+        PlayerController.Instance.AddChaos(maxHealth);
 
         Destroy(gameObject);
     }
