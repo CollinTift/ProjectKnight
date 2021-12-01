@@ -276,13 +276,15 @@ public class Enemy : MonoBehaviour {
     }
 
     public void Damage(int damage) {
+        fillBox.localScale = new Vector3(fillBoxMax.x * Mathf.Clamp((float)currentHealth / (float)maxHealth, 0f, 1f), fillBoxMax.y, fillBoxMax.z);
+        
         currentHealth -= damage;
 
         animator.SetTrigger("Damage");
 
         if (currentHealth <= 0) Die();
         
-        //fillBox.localScale = new Vector3(fillBoxMax.x * Mathf.Clamp((float)currentHealth / (float)maxHealth, 0f, 1f), fillBoxMax.y, fillBoxMax.z);
+        
     }
 
     private void Die() {

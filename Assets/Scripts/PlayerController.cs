@@ -235,8 +235,6 @@ public class PlayerController : MonoBehaviour {
 
                 break;
         }
-
-        Debug.Log(invItem.amount);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
