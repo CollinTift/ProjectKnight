@@ -39,7 +39,6 @@ public class Enemy : MonoBehaviour {
     private Animator animator;
     private GameObject target;
     private GridGraph gg;
-    private AudioSource aud;
 
     private bool canSpawnProj = true; //must be done bc called in animator, is scuffed
 
@@ -102,7 +101,6 @@ public class Enemy : MonoBehaviour {
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         aiPath = gameObject.GetComponent<AIPath>();
         animator = gameObject.GetComponent<Animator>();
-        aud = GetComponent<AudioSource>();
 
         target = new GameObject("target");        
     }
