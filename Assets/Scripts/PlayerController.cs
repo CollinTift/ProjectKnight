@@ -225,6 +225,7 @@ public class PlayerController : MonoBehaviour {
                 break;
             case Item.ItemType.Page:
                 memories++;
+                GameManager.Instance.UpdateMemories();
 
                 itemImages[1].GetComponentInChildren<TextMeshProUGUI>().text = "" + invItem.amount;
 

@@ -314,6 +314,9 @@ public class Enemy : MonoBehaviour {
                 break;
         }
 
+        PlayerController.Instance.memories++;
+        GameManager.Instance.UpdateMemories();
+
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
         rb.simulated = false;

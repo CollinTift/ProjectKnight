@@ -9,9 +9,12 @@ public class GameManager : MonoBehaviour {
     public GameObject gameOver;
     public GameObject nextFloor;
     public GameObject memoryScreen;
+    public GameObject winScreen;
 
     public TextMeshProUGUI memoryCounter;
     public TextMeshProUGUI memoryCounterMemScreen;
+
+    public TextMeshProUGUI waveCounter;
 
     [Header("Editable fields")]
     public float timeBetweenWaves = 60f; //time in seconds between each wave
@@ -46,6 +49,9 @@ public class GameManager : MonoBehaviour {
         gameOver.SetActive(false);
         nextFloor.SetActive(false);
         memoryScreen.SetActive(false);
+        winScreen.SetActive(false);
+
+        waveCounter.SetText("Current wave: " + currentWave);
 
         StartCoroutine("ShowNextFloorUI");
     }
@@ -55,6 +61,7 @@ public class GameManager : MonoBehaviour {
 
         if (currentWaveTimer >= timeBetweenWaves) {
             currentWave++;
+            waveCounter.SetText("Current wave: " + currentWave);
 
             difficulty *= (difficultyScale + 1f);
             enemiesThisWave += Mathf.FloorToInt(baseEnemiesPerWave * difficulty);
@@ -65,6 +72,8 @@ public class GameManager : MonoBehaviour {
 
     public void NextFloor() {
         memoryScreen.SetActive(true);
+
+        Time.timeScale = 0f;
 
         currentFloor++;
         timeBetweenWaves -= 1f;
@@ -82,8 +91,6 @@ public class GameManager : MonoBehaviour {
 
         GenerateMap generateMap = FindObjectOfType<GenerateMap>();
         generateMap.SetupMap();
-
-        StartCoroutine("ShowNextFloorUI");
     }
 
     private IEnumerator ShowNextFloorUI() {
@@ -189,13 +196,17 @@ public class GameManager : MonoBehaviour {
         if (PlayerController.Instance.memories >= 250) {
             PlayerController.Instance.memories -= 250;
             UpdateMemories();
-            Debug.Log("YOU WIN THE GAME");
+
+            winScreen.SetActive(true);
+            Time.timeScale = 0f;
         }
     }
 
     public void MemFinishUpgrade() {
         Time.timeScale = 1f;
         memoryScreen.SetActive(false);
+
+        StartCoroutine("ShowNextFloorUI");
     }
 
     public void UpdateMemories() {
