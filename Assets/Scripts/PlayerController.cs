@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour {
     private float attackTimer = 0f;
 
     private int shielding = 0;
+    public int maxShield = 0;
 
     public int attackDamage = 1;
     public int thornsDamage = 0;
@@ -87,6 +88,8 @@ public class PlayerController : MonoBehaviour {
         foreach (GameObject go in itemImages) {
             go.SetActive(false);
         }
+
+        GameManager.Instance.UpdateMemories();
     }
 
     void Update() {
@@ -123,12 +126,13 @@ public class PlayerController : MonoBehaviour {
                     if (Mathf.Abs(move.x) >= .2f || Mathf.Abs(move.y) >= .2f) {
                         currentChaos--;
                         chaosFillBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, chaosFillBoxMax.x * (float)currentChaos / (float)maxChaos);
-                        //StartCoroutine("Dash");
                         Dash();
                     } else {
-                        currentChaos--;
-                        chaosFillBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, chaosFillBoxMax.x * (float)currentChaos / (float)maxChaos);
-                        shielding++;
+                        if (maxShield > 0) {
+                            currentChaos--;
+                            chaosFillBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, chaosFillBoxMax.x * (float)currentChaos / (float)maxChaos);
+                            shielding++;
+                        }
                     }
                 }
             }

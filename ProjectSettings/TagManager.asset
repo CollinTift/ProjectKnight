@@ -10,6 +10,7 @@ TagManager:
   - GameOverUI
   - Prop
   - MustLive
+  - MemoryScreen
   layers:
   - Default
   - TransparentFX

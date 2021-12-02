@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance;
     public GameObject gameOver;
     public GameObject nextFloor;
+    public GameObject memoryScreen;
+
+    public TextMeshProUGUI memoryCounter;
+    public TextMeshProUGUI memoryCounterMemScreen;
 
     [Header("Editable fields")]
     public float timeBetweenWaves = 60f; //time in seconds between each wave
@@ -38,8 +42,10 @@ public class GameManager : MonoBehaviour {
         }
 
         gameOver = GameObject.FindWithTag("GameOverUI");
+        memoryScreen = GameObject.FindWithTag("MemoryScreen");
         gameOver.SetActive(false);
         nextFloor.SetActive(false);
+        memoryScreen.SetActive(false);
 
         StartCoroutine("ShowNextFloorUI");
     }
@@ -58,6 +64,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public void NextFloor() {
+        memoryScreen.SetActive(true);
+
         currentFloor++;
         timeBetweenWaves -= 1f;
         //kill all enemies, kill all props, kill all items, generate new map,  teleport player to spawn, setup everything again
@@ -95,5 +103,103 @@ public class GameManager : MonoBehaviour {
     public void enableGameOver() {
         gameOver.SetActive(true);
         Time.timeScale = 0f;
+    }
+
+    public void MemMaxHP() {
+        if (PlayerController.Instance.memories >= 3) {
+            PlayerController.Instance.memories -= 3;
+            UpdateMemories();
+            PlayerController.Instance.maxHealth++;
+        }
+    }
+
+    public void MemMaxChaos() {
+        if (PlayerController.Instance.memories >= 3) {
+            PlayerController.Instance.memories -= 3;
+            UpdateMemories();
+            PlayerController.Instance.maxChaos++;
+        }
+    }
+
+    public void MemDamage() {
+        if (PlayerController.Instance.memories >= 5) {
+            PlayerController.Instance.memories -= 5;
+            UpdateMemories();
+            PlayerController.Instance.attackDamage++;
+        }
+    }
+
+    public void MemSpeed() {
+        if (PlayerController.Instance.memories >= 2) {
+            PlayerController.Instance.memories -= 2;
+            UpdateMemories();
+            PlayerController.Instance.speed += .02f;
+        }
+    }
+
+    public void MemCritChance() {
+        if (PlayerController.Instance.memories >= 1) {
+            PlayerController.Instance.memories -= 1;
+            UpdateMemories();
+            PlayerController.Instance.critChance += 1;
+        }
+    }
+
+    public void MemCritDamage() {
+        if (PlayerController.Instance.memories >= 1) {
+            PlayerController.Instance.memories -= 1;
+            UpdateMemories();
+            PlayerController.Instance.critMult += .02f;
+        }
+    }
+
+    public void MemThorns() {
+        if (PlayerController.Instance.memories >= 1) {
+            PlayerController.Instance.memories -= 1;
+            UpdateMemories();
+            PlayerController.Instance.thornsDamage++;
+        }
+    }
+
+    public void MemHealPerWave() {
+        if (PlayerController.Instance.memories >= 2) {
+            PlayerController.Instance.memories -= 2;
+            UpdateMemories();
+            PlayerController.Instance.healPerWave++;
+        }
+    }
+
+    public void MemMaxShield() {
+        if (PlayerController.Instance.memories >= 3) {
+            PlayerController.Instance.memories -= 3;
+            UpdateMemories();
+            PlayerController.Instance.maxShield++;
+        }
+    }
+
+    public void MemDashSpeed() {
+        if (PlayerController.Instance.memories >= 3) {
+            PlayerController.Instance.memories -= 3;
+            UpdateMemories();
+            PlayerController.Instance.dashSpeedMultiplier += .1f;
+        }
+    }
+
+    public void MemReturnHome() {
+        if (PlayerController.Instance.memories >= 250) {
+            PlayerController.Instance.memories -= 250;
+            UpdateMemories();
+            Debug.Log("YOU WIN THE GAME");
+        }
+    }
+
+    public void MemFinishUpgrade() {
+        Time.timeScale = 1f;
+        memoryScreen.SetActive(false);
+    }
+
+    public void UpdateMemories() {
+        memoryCounter.SetText("Current Memories: " + PlayerController.Instance.memories);
+        memoryCounterMemScreen.SetText("Current Memories: " + PlayerController.Instance.memories);
     }
 }

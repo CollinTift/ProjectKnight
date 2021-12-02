@@ -273,8 +273,8 @@ public class GenerateMap : MonoBehaviour {
                     break;
             }
 
-            enemy.GetComponent<Enemy>().maxHealth += GameManager.Instance.currentWave;
-            enemy.GetComponent<Enemy>().attackDamage += GameManager.Instance.currentWave;
+            enemy.GetComponent<Enemy>().maxHealth += Mathf.RoundToInt(GameManager.Instance.currentWave * GameManager.Instance.difficulty);
+            enemy.GetComponent<Enemy>().attackDamage += Mathf.RoundToInt(GameManager.Instance.currentWave * GameManager.Instance.difficulty);
         }
     }
 
@@ -289,6 +289,7 @@ public class GenerateMap : MonoBehaviour {
                 case Room.RoomType.armory:
                 case Room.RoomType.library:
                 case Room.RoomType.diner:
+                case Room.RoomType.treasury:
                     spawnableRooms.Add(room);
                     break;
                 case Room.RoomType.exit:
@@ -361,6 +362,12 @@ public class GenerateMap : MonoBehaviour {
                             break;
                     }
                     
+                    break;
+                case Room.RoomType.treasury:
+                    randProp = Random.Range(0, 6);
+
+                    randType = (Prop.PropType)randProp;
+
                     break;
             }
 
