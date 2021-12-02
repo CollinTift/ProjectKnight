@@ -126,10 +126,12 @@ public class Prop : MonoBehaviour {
 
                 break;
             case PropType.WeaponRack:
-                if (randDrop < 20) {
+                if (randDrop < 10) {
                     Item.SpawnItem(transform.position, Item.ItemType.Sword);
-                } else if (randDrop >= 20 && randDrop < 40) {
+                } else if (randDrop >= 10 && randDrop < 30) {
                     Item.SpawnItem(transform.position, Item.ItemType.Shield);
+                } else if (randDrop >= 30 && randDrop < 40) {
+                    Item.SpawnItem(transform.position, Item.ItemType.Boot);
                 }
 
                 break;
