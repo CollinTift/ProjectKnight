@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour {
-    private int damage;
+    public int damage;
     private Vector3 shootDir;
     private float speed;
 
@@ -26,6 +26,10 @@ public class Projectile : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other) {
         if (other.collider.gameObject.layer == 3) PlayerController.Instance.Damage(damage);
+        //if (other.collider.gameObject.layer == 11) {
+        //    other.collider.GetComponent<Prop>().currentHealth -= damage;
+        //    other.collider.GetComponent<Prop>().Damage();
+        //}
 
         if (other.collider.gameObject.layer != 10) Destroy(gameObject);
     }

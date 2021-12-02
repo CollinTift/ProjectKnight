@@ -571,7 +571,7 @@ MonoBehaviour:
   alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
-  constrainInsideGraph: 0
+  constrainInsideGraph: 1
 --- !u!114 &-1638843589235755452
 MonoBehaviour:
   m_ObjectHideFlags: 0

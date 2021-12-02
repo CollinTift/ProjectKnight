@@ -165,10 +165,10 @@ public class Enemy : MonoBehaviour {
                     }
                 }
 
-                RaycastHit2D cast = Physics2D.Raycast(transform.position, lookDir, attackRange);
-                if (cast.collider.CompareTag("Prop")) {
-                    state = State.Attacking;
-                }
+                //RaycastHit2D cast = Physics2D.Raycast(transform.position, lookDir, attackRange);
+                //if (cast.collider.CompareTag("Prop")) {
+                //    state = State.Attacking;
+                //}
 
                 break;
             case State.Attacking:

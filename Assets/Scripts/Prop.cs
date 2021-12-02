@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Prop : MonoBehaviour {
     private int maxHealth;
-    private int currentHealth;
+    public int currentHealth;
 
-    private float iFrameTimer = 0f;
-    private float iFrameCD = .6f;
+    //private float iFrameTimer = 0f;
+    //private float iFrameCD = .6f;
 
     public enum PropType {
         Book,
@@ -43,27 +43,27 @@ public class Prop : MonoBehaviour {
                 rb.drag = 5f;
                 break;
             case PropType.Chair:
-                maxHealth = 3;
+                maxHealth = 2;
                 sp.sprite = PropAssets.GetRandomSprite(PropAssets.Instance.chairSprites);
                 rb.drag = 10f;
                 break;
             case PropType.Table:
-                maxHealth = 5;
+                maxHealth = 3;
                 sp.sprite = PropAssets.GetRandomSprite(PropAssets.Instance.tableSprites);
                 rb.drag = 20f;
                 break;
             case PropType.WeaponRack:
-                maxHealth = 7;
+                maxHealth = 5;
                 sp.sprite = PropAssets.GetRandomSprite(PropAssets.Instance.rackSprites);
                 rb.drag = 10f;
                 break;
             case PropType.Bookshelf:
-                maxHealth = 6;
+                maxHealth = 4;
                 sp.sprite = PropAssets.GetRandomSprite(PropAssets.Instance.shelfSprites);
                 rb.drag = 30f;
                 break;
             case PropType.Platter:
-                maxHealth = 2;
+                maxHealth = 1;
                 sp.sprite = PropAssets.GetRandomSprite(PropAssets.Instance.platterSprites);
                 rb.drag = 5f;
                 break;
@@ -76,26 +76,31 @@ public class Prop : MonoBehaviour {
         fillBoxMax = fillBox.localScale;
     }
 
-    private void Update() {
-        if (iFrameTimer < iFrameCD) {
-            iFrameTimer += Time.deltaTime;
-        }
-    }
+    //private void Update() {
+    //    if (iFrameTimer < iFrameCD) {
+    //        iFrameTimer += Time.deltaTime;
+    //    }
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision) {
         //player is 9, enemy is 10
-        if (collision.collider.gameObject.layer == 9 && iFrameTimer >= iFrameCD) {
+        if (collision.collider.gameObject.layer == 9) {
             currentHealth -= PlayerController.Instance.attackDamage;
-        } else if (collision.collider.gameObject.layer == 10 && iFrameTimer >= iFrameCD) {
-            currentHealth -= collision.collider.GetComponent<Enemy>().attackDamage;
+        } else if (collision.collider.gameObject.layer == 10) {
+            if (collision.collider.GetComponent<Enemy>() != null) currentHealth -= collision.collider.GetComponent<Enemy>().attackDamage;
+            if (collision.collider.GetComponent<Projectile>() != null) currentHealth -= collision.collider.GetComponent<Projectile>().damage;
         }
 
-        iFrameTimer = 0f;
+        //iFrameTimer = 0f;
 
         if (currentHealth <= 0) {
             Die();
         }
 
+        Damage();
+    }
+
+    public void Damage() {
         fillBox.localScale = new Vector3(fillBoxMax.x * Mathf.Clamp((float)currentHealth / (float)maxHealth, 0f, 1f), fillBoxMax.y, fillBoxMax.z);
     }
 
@@ -113,17 +118,17 @@ public class Prop : MonoBehaviour {
                 
                 break;
             case PropType.Chair:
-                if (randDrop < 20) Item.SpawnItem(transform.position, Item.ItemType.Splinter);
+                if (randDrop < 10) Item.SpawnItem(transform.position, Item.ItemType.Splinter);
 
                 break;
             case PropType.Table:
-                if (randDrop < 40) Item.SpawnItem(transform.position, Item.ItemType.Splinter);
+                if (randDrop < 20) Item.SpawnItem(transform.position, Item.ItemType.Splinter);
 
                 break;
             case PropType.WeaponRack:
-                if (randDrop < 25) {
+                if (randDrop < 20) {
                     Item.SpawnItem(transform.position, Item.ItemType.Sword);
-                } else if (randDrop >= 25 && randDrop < 50) {
+                } else if (randDrop >= 20 && randDrop < 40) {
                     Item.SpawnItem(transform.position, Item.ItemType.Shield);
                 }
 
@@ -131,15 +136,15 @@ public class Prop : MonoBehaviour {
             case PropType.Bookshelf:
                 if (randDrop < 10) {
                     Item.SpawnItem(transform.position, Item.ItemType.Tome);
-                } else if (randDrop >= 10 && randDrop < 30) {
+                } else if (randDrop >= 10 && randDrop < 20) {
                     Item.SpawnItem(transform.position, Item.ItemType.Splinter);
-                } else if (randDrop >= 30 && randDrop < 50) {
+                } else if (randDrop >= 20 && randDrop < 40) {
                     Item.SpawnItem(transform.position, Item.ItemType.Page);
                 }
 
                 break;
             case PropType.Platter:
-                if (randDrop < 50) Item.SpawnItem(transform.position, Item.ItemType.Bread);
+                if (randDrop < 40) Item.SpawnItem(transform.position, Item.ItemType.Bread);
 
                 break;
         }
