@@ -21,7 +21,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"F:/GitHub/ProjectKnight/WebGL Builds/v0.5;F:/GitHub/ProjectKnight/WebGL Builds/v0.4;F:/GitHub/ProjectKnight/WebGL Builds/v0.3;F:/GitHub/ProjectKnight/WebGL Builds/v0.2;F:/GitHub/ProjectKnight/WebGL Builds/v0.1;F:/GitHub/ProjectKnight/WebGL Builds;;;;\"}"
+                "value": "{\"m_Value\":\"F:/GitHub/ProjectKnight/WebGL Builds/v1.0;F:/GitHub/ProjectKnight/WebGL Builds/v0.5;F:/GitHub/ProjectKnight/WebGL Builds/v0.4;F:/GitHub/ProjectKnight/WebGL Builds/v0.3;F:/GitHub/ProjectKnight/WebGL Builds/v0.2;F:/GitHub/ProjectKnight/WebGL Builds/v0.1;F:/GitHub/ProjectKnight/WebGL Builds;;;\"}"
             }
         ]
     }
